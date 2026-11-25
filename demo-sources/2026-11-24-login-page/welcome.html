@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>로그인되어 있지 않음 - 한국 웹 접근성 플레이그라운드</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <p class="site-name">한국 웹 접근성 플레이그라운드</p>
+  </header>
+
+  <main id="content" class="page">
+    <section id="signed-out" class="status-panel" aria-labelledby="signed-out-heading">
+      <h1 id="signed-out-heading">로그인되어 있지 않습니다</h1>
+      <p>로그인한 기록이 없거나 로그아웃했습니다.</p>
+      <p><a href="index.html">로그인 화면으로 이동</a></p>
+    </section>
+
+    <section id="signed-in" class="status-panel status-panel--success" aria-labelledby="signed-in-heading" hidden>
+      <h1 id="signed-in-heading">로그인되었습니다</h1>
+      <p><strong id="signed-in-email"></strong> 계정으로 로그인했습니다.</p>
+      <p id="keep-message"></p>
+      <p>이 화면은 예시라서 실제 계정에 로그인하지 않았습니다. 로그인 상태는 이 브라우저에만 저장됩니다.</p>
+      <div class="form-actions">
+        <button type="button" class="button-secondary" id="logout-button">로그아웃</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>입력한 정보는 서버로 전송되지 않습니다.</p>
+  </footer>
+
+  <script src="welcome.js"></script>
+</body>
+</html>

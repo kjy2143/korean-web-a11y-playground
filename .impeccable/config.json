@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "demo-sources/2026-11-25-faq-accordion/index.html"
+        ],
+        "createdAt": "2026-11-24T15:49:28.574Z",
+        "reason": "Claude triage: only flagged element is inline <kbd> keycap (0.05em 0.35em padding inside 1px border) in body text; keycaps are conventionally tight and 8px inset would break line height"
+      }
+    ]
+  }
+}

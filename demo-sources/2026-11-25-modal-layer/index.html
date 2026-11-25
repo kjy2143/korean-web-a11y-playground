@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>모달 레이어 데모 - 한국 웹 접근성 플레이그라운드</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="modal.js" defer></script>
+</head>
+<body>
+  <header><p class="site-name">한국 웹 접근성 플레이그라운드</p></header>
+  <main>
+    <h1>모달 레이어</h1>
+    <p class="intro">안내 창을 열고, 키보드 초점이 어떻게 이동하는지 살펴보세요.</p>
+    <section class="example" aria-labelledby="example-title">
+      <div class="preview" aria-hidden="true">
+        <div class="window">
+          <div class="toolbar"><i></i><i></i><i></i></div>
+          <div class="sheet"><span></span><span></span><b></b></div>
+        </div>
+      </div>
+      <div class="content">
+        <h2 id="example-title">키보드 이용 안내</h2>
+        <p>창에서 사용할 수 있는 키를 확인하세요. 창을 닫으면 초점이 ‘안내 창 열기’ 버튼으로 돌아옵니다.</p>
+        <button id="open-guide" type="button" aria-haspopup="dialog" aria-controls="guide">안내 창 열기</button>
+      </div>
+    </section>
+  </main>
+  <dialog id="guide" aria-labelledby="guide-title" aria-describedby="guide-intro">
+    <h2 id="guide-title">키보드 이용 안내</h2>
+    <p id="guide-intro">이 창이 열려 있는 동안에는 창 안의 항목만 조작할 수 있습니다.</p>
+    <details>
+      <summary autofocus>키보드 조작 방법</summary>
+      <dl>
+        <dt><kbd>Tab</kbd></dt><dd>다음 항목으로 이동합니다.</dd>
+        <dt><kbd>Shift</kbd> + <kbd>Tab</kbd></dt><dd>이전 항목으로 이동합니다.</dd>
+        <dt><kbd>Esc</kbd></dt><dd>안내 창을 닫습니다.</dd>
+      </dl>
+    </details>
+    <form method="dialog"><button type="submit">닫기</button></form>
+  </dialog>
+</body>
+</html>

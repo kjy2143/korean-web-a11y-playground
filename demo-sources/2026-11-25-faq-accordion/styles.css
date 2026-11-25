@@ -1,0 +1,216 @@
+/* 자주 묻는 질문 화면 스타일
+   로그인 예시(../2026-11-24-login-page/styles.css)의 색 변수와 머리글·본문 스타일을 그대로 쓴다.
+   글자 색 대비는 각 배경 기준 4.5:1 이상이다. */
+
+:root {
+  --color-text: #1e2124;          /* 흰 배경 16.18:1, 연회색 14.82:1, 연파랑 14.52:1 */
+  --color-text-muted: #4d5257;    /* 흰 배경 7.89:1, 연회색 7.23:1, 연파랑 7.09:1 */
+  --color-primary: #0b50d0;       /* 흰 배경 6.83:1, 연회색 6.26:1, 연파랑 6.13:1 */
+  --color-primary-hover: #0b3a8c; /* 연회색 9.63:1 */
+  --color-primary-tint: #eef3fb;
+  --color-border: #8a949e;        /* 흰 배경 3.08:1 */
+  --color-bg: #ffffff;
+  --color-bg-tinted: #f4f5f6;
+  --color-header: #063a74;        /* 흰 글자 11.26:1 */
+  --color-focus: #0b50d0;
+  --radius: 8px;
+  --page-width: 45rem;
+  --font-sans: "Pretendard GOV", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "D2Coding", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-tinted);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 머리글과 바닥글 */
+
+.site-header {
+  background: var(--color-header);
+  color: #ffffff;
+}
+
+.site-name {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 1rem;
+  font-weight: 700;
+}
+
+/* 본문 */
+
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 2rem 1rem 1rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.875rem;
+  line-height: 1.3;
+}
+
+.lead {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+kbd {
+  padding: 0.05em 0.35em;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  white-space: nowrap;
+}
+
+/* 아코디언
+   질문과 질문 사이는 구분선으로, 질문과 답변 사이는 구분선과 배경색(흰색 / 연회색)으로 나눈다. */
+
+.accordion {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.accordion__item + .accordion__item {
+  border-top: 1px solid var(--color-border);
+}
+
+.accordion__heading {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+/* 제목 줄 전체가 버튼이라 어디를 눌러도 펼치고 접는다. 높이는 3.5rem(56px) 이상이다. */
+.accordion__button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 3.5rem;
+  margin: 0;
+  padding: 0.875rem 1.25rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion__item:first-child .accordion__button {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.accordion__item:last-child .accordion__button[aria-expanded="false"] {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.accordion__button:hover {
+  background: var(--color-primary-tint);
+}
+
+/* 초점 표시: 버튼 안쪽에 3px 실선. 이웃한 항목이나 바깥 테두리에 가려지지 않는다.
+   마우스로 눌러 초점을 받은 경우에도 같은 실선을 보이도록 :focus-visible 대신 :focus를 쓴다. */
+.accordion__button:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
+
+.accordion__question {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 펼침 상태는 화살표 방향(접힘: 아래, 펼침: 위)으로 보여 준다. 색에 기대지 않는다. */
+.accordion__icon {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.accordion__button[aria-expanded="true"] .accordion__icon {
+  transform: rotate(180deg);
+}
+
+.accordion__panel {
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-tinted);
+}
+
+.accordion__item:last-child .accordion__panel {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.accordion__panel[hidden] {
+  display: none;
+}
+
+.accordion__panel > * {
+  margin: 0;
+}
+
+.accordion__panel > * + * {
+  margin-top: 0.75rem;
+}
+
+.accordion__panel ul {
+  padding-left: 1.25rem;
+}
+
+.accordion__panel li + li {
+  margin-top: 0.375rem;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion__icon {
+    transition: none;
+  }
+}
