@@ -43,8 +43,8 @@ export function renderDetail(demo) {
         <h1>${escape(demo.title)}</h1>
         <p class="detail-date"><time datetime="${demo.date}">${formatDate(demo.date)}</time></p>
       </div>
-      <a class="primary-link" href="${escape(demo.url)}" aria-label="데모 열기 (${escape(demo.title)})">
-        <span class="link-label">데모 열기</span><span class="link-arrow" aria-hidden="true">→</span>
+      <a class="primary-link" href="${escape(demo.url)}" target="_blank" rel="noopener" aria-label="데모 열기 (새 창) · ${escape(demo.title)}">
+        <span class="link-label">데모 열기 (새 창)</span><span class="link-arrow" aria-hidden="true">↗</span>
       </a>
     </div>
     <article class="report" aria-label="실행 결과">
