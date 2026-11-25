@@ -26,4 +26,4 @@ npm run build
 npm run preview
 ```
 
-Netlify는 [netlify.toml](netlify.toml)의 설정에 따라 `dist/`를 게시합니다. 운영 브랜치는 `main`이며 목표 주소는 `kwcag-playgroud.fe4all.dev`입니다. 상세 주소는 `/?demo=<폴더명>` 형태이므로 정적 호스팅에서 직접 열 수 있습니다.
+Netlify는 [netlify.toml](netlify.toml)의 설정에 따라 `dist/`를 게시합니다. 운영 브랜치는 `main`이며 목표 주소는 `kwcag-playground.fe4all.dev`입니다. 상세 주소는 `/?demo=<폴더명>` 형태이므로 정적 호스팅에서 직접 열 수 있습니다.
