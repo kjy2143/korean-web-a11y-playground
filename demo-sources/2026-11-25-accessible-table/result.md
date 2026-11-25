@@ -8,11 +8,21 @@
 
 ## 적용 기준과 참고 자료
 
-- [KWCAG 5.3.1 표의 구성](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.3.1.json). 표 정보를 제공하고 제목 셀과 데이터 셀을 구분한다. `caption`, `th scope="col"`, `th scope="row"` 사용은 [NIA 제작기법의 적용 사례](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-1.3.1-s4.json)를 참고했다.
+### KWCAG 2.2 요구사항
+
+- [KWCAG 5.3.1 표의 구성](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.3.1.json). 표 정보를 제공하고 제목 셀과 데이터 셀을 구분했다.
 - [KWCAG 5.4.1 색에 무관한 콘텐츠 인식](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.4.1.json). 운영하지 않는 시간대에는 ‘휴관’을 글자로 표시했다.
 - [KWCAG 5.4.3 텍스트 콘텐츠의 명도 대비](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.4.3.json). 본문, 표 머리글, 휴관 상태 및 링크의 텍스트 색은 각 배경색과 4.5:1 이상 대비를 확보했다.
 - [KWCAG 6.1.1 키보드 사용 보장](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.1.json)과 [KWCAG 6.1.2 초점 이동과 표시](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.2.json). 표 영역은 가로 스크롤이 필요할 때 탭 순서에 들어간다. 초점은 테두리로 표시하고 방향키 스크롤은 브라우저 기본 동작을 사용한다.
 - [KWCAG 6.4.2 제목 제공](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.4.2.json)과 [KWCAG 7.1.1 기본 언어 표시](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-7.1.1.json). 문서 제목과 `h1`·`h2`를 지정하고 `lang="ko"`를 설정했다.
+
+### NIA 제작기법 권장 사항
+
+표 이름은 `caption`으로 제공하고, `th scope="col"`과 `th scope="row"`로 열과 행의 머리글을 지정했다. [NIA 표의 구성 적용 사례](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-1.3.1-s4.json)
+
+### 구현에 사용한 웹 표준
+
+표가 넘칠 때만 `tabindex="0"`으로 스크롤 영역을 탭 순서에 넣고, 그 외에는 `tabindex="-1"`로 뺐다. `role="region"`과 `aria-label`로 영역에 이름을 지정했다. 키보드 초점에는 `:focus-visible`로 테두리를 표시했다. [HTML `tabindex`](https://html.spec.whatwg.org/multipage/interaction.html#the-tabindex-attribute) · [WAI-ARIA `region`](https://www.w3.org/TR/wai-aria-1.2/#region) · [CSS `:focus-visible`](https://www.w3.org/TR/selectors-4/#the-focus-visible-pseudo)
 
 ## 검증 결과
 
