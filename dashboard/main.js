@@ -11,17 +11,44 @@ let loadError = false;
 let currentMarkup;
 let request;
 
+function updateReportTableAccess() {
+  for (const region of content.querySelectorAll('.report-table[id]')) {
+    const hint = document.getElementById(`${region.id}-hint`);
+    const scrolls = region.scrollWidth > region.clientWidth;
+    region.tabIndex = scrolls ? 0 : -1;
+    hint.hidden = !scrolls;
+    if (scrolls) {
+      region.setAttribute('aria-describedby', hint.id);
+    } else {
+      region.removeAttribute('aria-describedby');
+    }
+  }
+}
+
+const reportObserver = new ResizeObserver(updateReportTableAccess);
+
 function updateContent(markup) {
   if (currentMarkup === markup) return;
+  const firstRender = currentMarkup === undefined;
   currentMarkup = markup;
 
   const focused = document.activeElement;
-  const focusedLink = content.contains(focused) && focused.closest('a[href]');
+  const restoreFocus = content.contains(focused) && focused !== content;
+  reportObserver.disconnect();
   content.innerHTML = markup;
-  if (focusedLink) {
-    const sameLink = [...content.querySelectorAll('a[href]')]
-      .find((link) => link.href === focusedLink.href && link.textContent === focusedLink.textContent);
-    (sameLink ?? content).focus({ preventScroll: true });
+  updateReportTableAccess();
+  for (const element of content.querySelectorAll('.report-table, .report-table table')) {
+    reportObserver.observe(element);
+  }
+
+  if (restoreFocus) {
+    const sameElement = focused.id ? document.getElementById(focused.id) : null;
+    const sameLink = focused.matches('a[href]') && [...content.querySelectorAll('a[href]')]
+      .find((link) => link.href === focused.href && link.textContent === focused.textContent);
+    (sameElement || sameLink || content).focus({ preventScroll: true });
+  }
+  if (firstRender && location.hash.startsWith('#report-section-')) {
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   }
 }
 

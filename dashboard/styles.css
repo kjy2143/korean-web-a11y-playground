@@ -61,12 +61,17 @@ main {
 }
 
 h1, h2, h3, p { margin-block-start: 0; }
-h1, h2, h3 { line-height: 1.25; overflow-wrap: anywhere; }
+h1, h2, h3 {
+  line-height: 1.25;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
 
 h1 {
   margin-block-end: 0.75rem;
   font-size: clamp(2.25rem, 5.8vw, 4.1rem);
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
 }
 
 .intro {
@@ -115,34 +120,39 @@ p code, li code, td code {
   list-style: none;
 }
 
-.demo-card {
+.demo-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 0.35rem 1rem;
+  min-block-size: 100%;
   padding: 1.25rem 1.5rem;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 0.875rem;
-}
-
-.demo-card:hover, .demo-card:focus-within { border-color: var(--accent); }
-.demo-card h3 { margin: 0; font-size: 1.35rem; }
-
-.demo-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-block-size: 2.75rem;
-  text-decoration: none;
   color: var(--ink);
+  text-decoration: none;
 }
 
-.demo-link:hover .link-label { text-decoration: underline; }
+.demo-link:hover, .demo-link:focus-visible { border-color: var(--accent); }
+.demo-card h3 { margin: 0; font-size: 1.35rem; }
+.demo-link .link-label { text-decoration: underline; text-decoration-thickness: from-font; }
+.demo-link:hover .link-label { text-decoration-thickness: 0.13em; }
 .demo-link .link-arrow { color: var(--accent); }
 
+.demo-description {
+  grid-column: 1 / -1;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 .demo-meta {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 1rem;
-  margin: 0.45rem 0 0;
+  margin: 0.15rem 0 0;
   font-size: 0.875rem;
 }
 
@@ -199,12 +209,40 @@ p code, li code, td code {
 }
 
 .report > :last-child { margin-block-end: 0; }
-.report-note { color: var(--muted); font-size: 0.875rem; }
+.report > :is(p, ul, ol, blockquote) {
+  max-inline-size: 70ch;
+  word-break: keep-all;
+}
+.report-note, .report-table-hint { color: var(--muted); font-size: 0.875rem; }
 .report h2 { font-size: 1.5rem; }
 .report h3 { margin-block-start: 1.85rem; font-size: 1.25rem; }
 .report h4 { margin-block-start: 1.5rem; font-size: 1.1rem; }
+.report h3[id] { scroll-margin-block-start: 1rem; }
 .report img { max-inline-size: 100%; height: auto; }
 .report li + li { margin-block-start: 0.45rem; }
+
+.report-nav {
+  margin-block: 1.25rem 1rem;
+  border-block: 1px solid var(--line);
+  padding-block: 0.25rem;
+}
+
+.report-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.report-nav li + li { margin: 0; }
+
+.report-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+}
 
 .report pre, .report-table {
   max-inline-size: 100%;
@@ -217,6 +255,8 @@ p code, li code, td code {
 }
 
 .report-table { margin-block: 1rem 1.75rem; }
+.report-table-hint { margin-block-end: 0.5rem; }
+.report-table-hint:not([hidden]) + .report-table { margin-block-start: 0; }
 
 .report table {
   inline-size: 100%;
@@ -230,10 +270,18 @@ p code, li code, td code {
   border: 1px solid var(--line);
   text-align: start;
   vertical-align: top;
+  word-break: keep-all;
 }
 
 .report th { background: #e9eee3; }
 .report td:first-child { min-inline-size: 6rem; }
+.report th:nth-child(2), .report td:nth-child(2) { min-inline-size: 8rem; }
+
+.report caption {
+  padding-block-end: 0.5rem;
+  color: var(--muted);
+  text-align: start;
+}
 
 .skip-link {
   position: absolute;
@@ -251,5 +299,5 @@ p code, li code, td code {
 
 @media (max-width: 32rem) {
   .shell { width: calc(100% - 2rem); }
-  .demo-card { padding-inline: 1rem; }
+  .demo-link { padding-inline: 1rem; }
 }

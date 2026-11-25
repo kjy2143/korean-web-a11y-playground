@@ -10,13 +10,18 @@ function formatDate(date) {
 
 function renderCard(demo) {
   const name = escape(demo.title);
+  const id = `demo-${escape(demo.id)}`;
   return `
     <li class="demo-card">
-      <h3><a class="demo-link" href="/?demo=${encodeURIComponent(demo.id)}"><span class="link-label">${name}</span><span class="link-arrow" aria-hidden="true">→</span></a></h3>
-      <p class="demo-meta">
-        <time datetime="${demo.date}">${formatDate(demo.date)}</time>
-        <span class="result-status">${demo.result ? '실행 결과 있음' : '실행 결과 없음'}</span>
-      </p>
+      <a id="${id}" class="demo-link" href="/?demo=${encodeURIComponent(demo.id)}" aria-labelledby="${id}-title" ${demo.description ? `aria-describedby="${id}-description"` : ''}>
+        <h3 id="${id}-title" class="link-label">${name}</h3>
+        <span class="link-arrow" aria-hidden="true">→</span>
+        ${demo.description ? `<p id="${id}-description" class="demo-description">${escape(demo.description)}</p>` : ''}
+        <p class="demo-meta">
+          <time datetime="${demo.date}">${formatDate(demo.date)}</time>
+          ${demo.result ? '' : '<span>실행 결과 없음</span>'}
+        </p>
+      </a>
     </li>`;
 }
 
@@ -35,6 +40,19 @@ export function renderList(demos) {
     </section>`;
 }
 
+function renderReport(result) {
+  if (!result) return '<p>아직 등록된 실행 결과가 없습니다.</p>';
+  const sections = result.sections ?? [];
+  return `
+    ${result.intro ?? ''}
+    ${sections.length ? `
+      <nav class="report-nav" aria-label="실행 결과 목차">
+        <ul>${sections.map(({ id, title }) => `<li><a href="#${escape(id)}">${escape(title)}</a></li>`).join('')}</ul>
+      </nav>` : ''}
+    <p id="report-source-link-note" class="report-note">외부 근거 링크는 새 창에서 열립니다.</p>
+    ${result.body ?? result}`;
+}
+
 export function renderDetail(demo) {
   return `
     <a class="back-link" href="/"><span class="link-arrow" aria-hidden="true">←</span><span class="link-label">데모 목록</span></a>
@@ -47,9 +65,9 @@ export function renderDetail(demo) {
         <span class="link-label">데모 열기 (새 창)</span><span class="link-arrow" aria-hidden="true">↗</span>
       </a>
     </div>
-    <article class="report" aria-label="실행 결과">
-      ${demo.result ? `<p id="report-source-link-note" class="report-note">외부 근거 링크는 새 창에서 열립니다.</p>${demo.result}` :
-        '<h2>실행 결과</h2><p>아직 등록된 실행 결과가 없습니다.</p>'}
+    <article class="report" aria-labelledby="report-title">
+      <h2 id="report-title">실행 결과</h2>
+      ${renderReport(demo.result)}
     </article>`;
 }
 

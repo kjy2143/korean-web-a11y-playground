@@ -1,5 +1,9 @@
 # 로그인 데모 개발 결과
 
+Chromium에서 입력 오류와 계정 불일치 안내, 로그인과 로그아웃 흐름을 확인했다. 화면낭독기와 Chromium 외 브라우저에서의 동작은 미검증 상태다.
+
+## 사용 방법
+
 예시 계정으로 입력 오류, 계정 불일치, 로그인 성공과 로그아웃을 체험한다. 로그인 상태 유지를 선택하면 이 브라우저에 상태를 저장한다. 회원가입 데모는 별도의 예시다.
 
 - 구현한 파일: `index.html`, `welcome.html`, `styles.css`, `login.js`, `welcome.js`
@@ -7,7 +11,7 @@
 - [근거 자료 목록 v1](https://kwcag-docs.fe4all.dev/v1/llms.txt)
 - 자료 상태: dataVersion v1, generatorCommit 2feade1fe16ee41a7c18cd2af3862c4fa2d74a8c
 
-## 적용한 KWCAG 항목과 근거 자료
+## 적용 기준과 참고 자료
 
 KWCAG는 검사항목 본문, NIA와 KRDS는 구현 참고 자료다. KRDS 링크는 공식 가이드의 해당 페이지로 연결한다.
 
@@ -31,7 +35,7 @@ KWCAG는 검사항목 본문, NIA와 KRDS는 구현 참고 자료다. KRDS 링�
 | 7.3.3 | 접근 가능한 인증 | `index.html`의 이메일 `autocomplete="username"`, 비밀번호 `autocomplete="current-password"`, 비밀번호 안내 문구(`#password-hint`), 비밀번호 표시 체크 상자. 붙여넣기를 막지 않고 CAPTCHA를 쓰지 않는다. | [KWCAG 7.3.3](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-7.3.3.json), [NIA 3.3.3](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-3.3.3.json), [NIA 3.3.3-s4](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-3.3.3-s4.json), [NIA 3.3.3-s5](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-3.3.3-s5.json), [KRDS 로그인 방식 확인/선택 · 접근성 가이드라인](https://www.krds.go.kr/html/site/service/service_03_04.html), [KRDS 로그인 정보 입력 · 접근성 가이드라인](https://www.krds.go.kr/html/site/service/service_03_05.html) |
 | 8.1.1 | 마크업 오류 방지 | `index.html`, `welcome.html` 전체 | [KWCAG 8.1.1](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-8.1.1.json) |
 
-## 확인한 동작
+## 검증 결과
 
 ### 코드 검토로 확인
 

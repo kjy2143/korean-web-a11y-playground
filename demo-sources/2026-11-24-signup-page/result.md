@@ -1,5 +1,9 @@
 # 회원가입 데모 개발 결과
 
+Chromium에서 필수 항목 오류, 오류 정정과 가입 완료 안내를 확인했다. 화면낭독기와 Chromium 외 브라우저에서의 동작은 미검증 상태다.
+
+## 사용 방법
+
 예시 값과 필수 약관으로 입력 오류, 정정, 가입 완료 안내를 체험한다. 가입 완료는 같은 화면에서 안내하며 실제 계정은 생성하지 않는다.
 
 - 구현한 파일: `index.html`, `styles.css`, `signup.js`
@@ -7,7 +11,7 @@
 - [근거 자료 목록 v1](https://kwcag-docs.fe4all.dev/v1/llms.txt)
 - 자료 상태: dataVersion v1, generatorCommit 2feade1fe16ee41a7c18cd2af3862c4fa2d74a8c
 
-## 적용한 KWCAG 항목과 근거 자료
+## 적용 기준과 참고 자료
 
 KWCAG는 검사항목 본문, NIA와 KRDS는 구현 참고 자료다. KRDS 링크는 공식 가이드의 해당 페이지로 연결한다.
 
@@ -31,7 +35,7 @@ KWCAG는 검사항목 본문, NIA와 KRDS는 구현 참고 자료다. KRDS 링�
 | 7.3.4 | 반복 입력 정보 | `index.html` 양식 전체. 한 화면에서 같은 정보를 두 번 묻지 않는다. 비밀번호 확인은 KWCAG 7.3.4 본문이 보안 목적 재입력으로 예외를 둔 경우다. 오류가 나도 입력한 값을 지우지 않는다. | [KWCAG 7.3.4](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-7.3.4.json), [KRDS 입력폼 · 접근성 가이드라인](https://www.krds.go.kr/html/site/global/global_08.html) |
 | 8.1.1 | 마크업 오류 방지 | `index.html` 전체 | [KWCAG 8.1.1](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-8.1.1.json) |
 
-## 확인한 동작
+## 검증 결과
 
 ### 코드 검토로 확인
 
