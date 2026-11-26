@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>자막이 없는 시설 안내 영상 - 한국 웹 접근성 플레이그라운드</title>
+  <meta name="description" content="비교 사례입니다. 영상은 같지만 자막 트랙을 제공하지 않습니다.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="site-name">한국 웹 접근성 플레이그라운드</p>
+      <h1>자막이 없는 시설 안내 영상</h1>
+      <p>비교 사례입니다. 영상은 같지만 자막 트랙을 제공하지 않습니다.</p>
+    </header>
+
+    <section aria-labelledby="video-heading">
+      <h2 id="video-heading">안내 데스크 호출음</h2>
+      <p>재생 버튼을 누르면 약 8초 동안 영상을 볼 수 있습니다.</p>
+      <video src="desk-chimes.mp4" controls playsinline preload="metadata" width="800" height="450" aria-labelledby="video-heading">
+        브라우저에서 동영상을 재생할 수 없습니다.
+      </video>
+    </section>
+
+    <footer>
+      <a href="index.html">개선본으로 돌아가기</a>
+      <a href="wrong-captions.html">비교 사례 보기 · 자막 내용 불일치</a>
+      <a href="https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.2.1.json">KWCAG 5.2.1 자막 제공</a>
+      <a href="https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.4.2.json">KWCAG 5.4.2 자동 재생 금지</a>
+    </footer>
+  </main>
+</body>
+</html>

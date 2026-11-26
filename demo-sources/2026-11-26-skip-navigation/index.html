@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>본문 바로가기 - 한국 웹 접근성 플레이그라운드</title>
+  <meta name="description" content="공통 메뉴를 건너뛰고 도서관 이용 안내로 이동하는 예시입니다.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" id="skip-link" href="#main-content">본문 바로가기</a>
+
+  <header>
+    <div class="shell">
+      <p class="brand">푸른숲도서관</p>
+      <nav aria-label="도서관 메뉴">
+        <ul>
+          <li><a href="./" aria-current="page">이용 안내</a></li>
+          <li><a href="visit.html">방문 안내</a></li>
+          <li><a href="../../?demo=2026-11-26-skip-navigation">플레이그라운드에서 데모 설명 보기</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell" id="main-content" tabindex="-1">
+    <h1>본문 바로가기</h1>
+    <p>푸른숲도서관에는 일반 자료실과 어린이 자료실이 있습니다. 처음 방문한다면 층별 시설과 운영 시간을 확인하세요.</p>
+    <p><a href="visit.html" id="main-action">층별 시설과 운영 시간 보기</a></p>
+
+    <section>
+      <h2>반복 메뉴 건너뛰기 실습</h2>
+      <p>페이지를 연 뒤 처음 <kbd>Tab</kbd>을 누르면 ‘본문 바로가기’가 나타납니다.
+        <kbd>Enter</kbd>로 본문으로 이동한 다음 다시 <kbd>Tab</kbd>을 눌러 보세요.</p>
+      <p><a href="broken-link.html">연결 대상이 없는 비교 사례 열기</a></p>
+    </section>
+  </main>
+</body>
+</html>

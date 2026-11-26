@@ -1,0 +1,77 @@
+:root {
+  color: #1b2c2d;
+  background: #edf5f2;
+  font: 100%/1.65 system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  width: min(44rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding-block: clamp(2rem, 7vw, 5rem);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.lead {
+  margin-block: .75rem 1.75rem;
+}
+
+.material {
+  margin-bottom: 1.25rem;
+  padding: clamp(1rem, 4vw, 1.75rem);
+  border: 1px solid #617f77;
+  border-inline-start: .3rem solid #155743;
+  border-radius: .75rem;
+  background: #fff;
+}
+
+.material p {
+  margin-top: .5rem;
+}
+
+.material a {
+  margin-top: .75rem;
+  padding-inline: .75rem;
+  border: 1px solid #155743;
+  border-radius: .35rem;
+  background: #eef7f3;
+}
+
+.comparison,
+footer {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #617f77;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  color: #155743;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+a:focus-visible {
+  outline: 3px solid #155743;
+  outline-offset: 3px;
+}
