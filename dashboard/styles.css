@@ -1,16 +1,37 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
-  color: #172b25;
-  background: #f7f7f0;
+  color: var(--ink);
+  background: var(--background);
   font-synthesis: none;
   line-height: 1.65;
+  --background: #f7f7f0;
   --paper: #fffef9;
   --ink: #172b25;
   --muted: #4b5a50;
   --accent: #244f42;
+  --accent-hover: #183a2f;
+  --on-accent: #fffef9;
   --line: #ced5c8;
   --focus: #934500;
+  --code-background: #eef1e8;
+  --table-heading-background: #e9eee3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #161b19;
+    --paper: #202924;
+    --ink: #edf2ec;
+    --muted: #bac9bd;
+    --accent: #9bd8bd;
+    --accent-hover: #bce9d4;
+    --on-accent: #153127;
+    --line: #657d70;
+    --focus: #ffbc79;
+    --code-background: #2b3831;
+    --table-heading-background: #2f4037;
+  }
 }
 
 * { box-sizing: border-box; }
@@ -95,7 +116,7 @@ code, kbd {
 p code, li code, td code {
   padding: 0.1em 0.25em;
   border-radius: 0.25em;
-  background: #eef1e8;
+  background: var(--code-background);
 }
 
 .demo-list { margin-block-start: 1.75rem; }
@@ -182,12 +203,12 @@ p code, li code, td code {
   min-block-size: 2.75rem;
   padding: 0.6rem 1rem;
   border-radius: 0.5rem;
-  color: #fffef9;
+  color: var(--on-accent);
   background: var(--accent);
   font-weight: 700;
 }
 
-.primary-link:hover { background: #183a2f; }
+.primary-link:hover { background: var(--accent-hover); }
 
 .back-link, .primary-link { text-decoration: none; }
 
@@ -251,7 +272,7 @@ p code, li code, td code {
 
 .report pre {
   padding: 1rem;
-  background: #eef1e8;
+  background: var(--code-background);
 }
 
 .report-table { margin-block: 1rem 1.75rem; }
@@ -273,7 +294,7 @@ p code, li code, td code {
   word-break: keep-all;
 }
 
-.report th { background: #e9eee3; }
+.report th { background: var(--table-heading-background); }
 .report td:first-child { min-inline-size: 6rem; }
 .report th:nth-child(2), .report td:nth-child(2) { min-inline-size: 8rem; }
 
