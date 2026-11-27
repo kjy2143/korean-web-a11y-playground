@@ -33,7 +33,7 @@ export function groupDemos(demos) {
 function renderVariantLink(group, demo, label) {
   return `
     <li>
-      <a class="variant-link" href="${detailHref(demo)}"><span class="visually-hidden">${escape(group.title)} · </span><span class="link-label">${label}</span><span class="visually-hidden"> 상세</span><span class="link-arrow" aria-hidden="true">→</span></a>
+      <a class="variant-link" href="${detailHref(demo)}"><span class="link-label">${label}</span><span class="visually-hidden"> · ${escape(group.title)}</span><span class="link-arrow" aria-hidden="true">→</span></a>
       ${demo.result ? '' : '<span class="variant-note">실행 결과 없음</span>'}
     </li>`;
 }

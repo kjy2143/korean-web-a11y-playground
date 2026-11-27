@@ -50,12 +50,22 @@ test('renders a topic with only one variant', () => {
 test('renders a legacy demo without variant', () => {
   const html = renderList([demo('2026-11-26-b')]);
   assert.equal(count(html, 'class="topic-card"'), 1);
-  assert.deepEqual(links(html).map(({ href }) => href), ['/?demo=2026-11-26-b']);
+  assert.deepEqual(links(html), [{ href: '/?demo=2026-11-26-b', text: '상세 보기 · 가' }]);
 });
 
-test('link names include the topic', () => {
-  const offLink = links(renderList([off, on])).find(({ href }) => href.endsWith('-off'));
-  assert.equal(offLink.text, '가 · 기본 개발 (off) 상세');
+test('link names start with the visible label and include the topic', () => {
+  assert.deepEqual(links(renderList([off, on])).map(({ text }) => text), ['기본 개발 (off) · 가', '접근성 자료 적용 (on) · 가']);
+});
+
+test('card uses the on title and description when both exist', () => {
+  const html = renderList([{ ...off, title: '기본 제목', description: '기본 설명' }, { ...on, title: '개선 제목', description: '개선 설명' }]);
+  assert.match(html, /<h3>개선 제목<\/h3>/);
+  assert.match(html, /개선 설명/);
+  assert.doesNotMatch(html, /기본 제목|기본 설명/);
+});
+
+test('card falls back to the off title without an on demo', () => {
+  assert.match(renderList([{ ...off, title: '기본 제목' }]), /<h3>기본 제목<\/h3>/);
 });
 
 test('counts topics and demos next to the heading', () => {
