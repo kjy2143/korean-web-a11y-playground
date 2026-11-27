@@ -4,5 +4,7 @@ docs/superpowers/
 .playwright-mcp/
 tests/private-names.local.txt
 .claude/
+.agents/skills/demo-pair
+.skills/demo-pair/
 .impeccable/
 .superpowers/
