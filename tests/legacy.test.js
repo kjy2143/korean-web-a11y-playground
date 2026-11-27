@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { legacyDemoTargets, resolveDemoId } from '../dashboard/legacy-demos.js';
 
@@ -41,5 +41,11 @@ test('netlify redirects each legacy demo folder', async () => {
     assert.ok(block, `missing redirect for ${id}`);
     assert.match(block, new RegExp(`to = "/demos/${target}/"`));
     assert.match(block, /status = 301/);
+  }
+});
+
+test('every redirect target exists in demo-sources', async () => {
+  for (const target of Object.values(legacyDemoTargets)) {
+    await access(new URL(`../demo-sources/${target}/index.html`, import.meta.url));
   }
 });
