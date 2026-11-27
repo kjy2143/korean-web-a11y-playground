@@ -8,35 +8,64 @@ function formatDate(date) {
   return date.replaceAll('-', '.');
 }
 
-function renderCard(demo) {
-  const name = escape(demo.title);
-  const id = `demo-${escape(demo.id)}`;
+export const variantLabels = { off: '기본 개발 (off)', on: '접근성 자료 적용 (on)' };
+
+function detailHref(demo) {
+  return `/?demo=${encodeURIComponent(demo.id)}`;
+}
+
+export function groupDemos(demos) {
+  const groups = new Map();
+  for (const demo of demos) {
+    const topic = demo.topic ?? demo.id;
+    const group = groups.get(topic) ?? { topic };
+    group[demo.variant ?? 'single'] = demo;
+    groups.set(topic, group);
+  }
+  return [...groups.values()].map((group) => {
+    const lead = group.on ?? group.off ?? group.single;
+    const date = [group.off, group.on, group.single].filter(Boolean)
+      .map((demo) => demo.date).sort().at(-1);
+    return { ...group, title: lead.title, description: lead.description, date };
+  }).sort((left, right) => right.date.localeCompare(left.date) || left.title.localeCompare(right.title, 'ko'));
+}
+
+function renderVariantLink(group, demo, label) {
   return `
-    <li class="demo-card">
-      <a id="${id}" class="demo-link" href="/?demo=${encodeURIComponent(demo.id)}" aria-labelledby="${id}-title" ${demo.description ? `aria-describedby="${id}-description"` : ''}>
-        <h3 id="${id}-title" class="link-label">${name}</h3>
-        <span class="link-arrow" aria-hidden="true">→</span>
-        ${demo.description ? `<p id="${id}-description" class="demo-description">${escape(demo.description)}</p>` : ''}
-        <p class="demo-meta">
-          <time datetime="${demo.date}">${formatDate(demo.date)}</time>
-          ${demo.result ? '' : '<span>실행 결과 없음</span>'}
-        </p>
-      </a>
+    <li>
+      <a class="variant-link" href="${detailHref(demo)}"><span class="visually-hidden">${escape(group.title)} · </span><span class="link-label">${label}</span><span class="visually-hidden"> 상세</span><span class="link-arrow" aria-hidden="true">→</span></a>
+      ${demo.result ? '' : '<span class="variant-note">실행 결과 없음</span>'}
+    </li>`;
+}
+
+function renderTopicCard(group) {
+  const variants = [
+    group.off && renderVariantLink(group, group.off, variantLabels.off),
+    group.on && renderVariantLink(group, group.on, variantLabels.on),
+    group.single && renderVariantLink(group, group.single, '상세 보기'),
+  ].filter(Boolean);
+  return `
+    <li class="topic-card">
+      <h3>${escape(group.title)}</h3>
+      ${group.description ? `<p class="demo-description">${escape(group.description)}</p>` : ''}
+      <p class="demo-meta"><time datetime="${group.date}">${formatDate(group.date)}</time></p>
+      <ul class="variant-links">${variants.join('')}</ul>
     </li>`;
 }
 
 export function renderList(demos) {
+  const groups = groupDemos(demos);
   return `
     <div class="intro">
       <h1>웹 접근성 데모</h1>
-      <p>웹 접근성 데모를 체험하고, 적용한 KWCAG 2.2 기준과 검증 결과를 확인하세요.</p>
+      <p>같은 요청서로 만든 두 화면을 비교합니다. 기본 개발(off)은 국내 접근성 자료를 조회하지 않고 요청서대로 만든 화면이고, 접근성 자료 적용(on)은 그 화면을 KWCAG 2.2와 NIA 제작기법에 맞춰 개선한 화면입니다.</p>
     </div>
     <section class="demo-list" aria-labelledby="demo-list-title">
       <div class="section-heading">
         <h2 id="demo-list-title">데모 목록</h2>
-        <span>${demos.length}개</span>
+        <span>주제 ${groups.length}개 · 데모 ${demos.length}개</span>
       </div>
-      ${demos.length ? `<ul class="demo-grid">${demos.map(renderCard).join('')}</ul>` : '<p>등록된 데모가 없습니다.</p>'}
+      ${groups.length ? `<ul class="demo-grid">${groups.map(renderTopicCard).join('')}</ul>` : '<p>등록된 데모가 없습니다.</p>'}
     </section>`;
 }
 
@@ -53,13 +82,17 @@ function renderReport(result) {
     ${result.body ?? result}`;
 }
 
-export function renderDetail(demo) {
+export function renderDetail(demo, demos = []) {
+  const counterpart = demo.variant && demos.find((entry) =>
+    entry.topic === demo.topic && entry.variant && entry.variant !== demo.variant);
   return `
     <a class="back-link" href="/"><span class="link-arrow" aria-hidden="true">←</span><span class="link-label">데모 목록</span></a>
     <div class="detail-header">
       <div>
         <h1>${escape(demo.title)}</h1>
+        ${demo.variant ? `<p class="variant-badge">${variantLabels[demo.variant]}</p>` : ''}
         <p class="detail-date"><time datetime="${demo.date}">${formatDate(demo.date)}</time></p>
+        ${counterpart ? `<a class="pair-link" href="${detailHref(counterpart)}"><span class="link-label">${variantLabels[counterpart.variant]} 상세 보기</span><span class="link-arrow" aria-hidden="true">→</span></a>` : ''}
       </div>
       <a class="primary-link" href="${escape(demo.url)}" target="_blank" rel="noopener" aria-label="데모 열기 (새 창) · ${escape(demo.title)}">
         <span class="link-label">데모 열기 (새 창)</span><span class="link-arrow" aria-hidden="true">↗</span>

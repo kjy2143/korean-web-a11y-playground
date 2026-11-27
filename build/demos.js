@@ -68,6 +68,11 @@ async function readOptional(file) {
   }
 }
 
+export function demoVariant(id) {
+  const match = /^(.+)-(off|on)$/.exec(id);
+  return match ? { topic: match[1], variant: match[2] } : { topic: id, variant: null };
+}
+
 function readDemoMetadata(html, id) {
   const head = parse(html).childNodes.find((node) => node.tagName === 'html')
     ?.childNodes.find((node) => node.tagName === 'head');
@@ -108,7 +113,7 @@ function renderReport(source, demoUrl) {
   };
 }
 
-async function readCatalog(root) {
+export async function readCatalog(root) {
   const entries = await readdir(root, { withFileTypes: true });
   const ids = entries
     .filter((entry) => entry.isDirectory() && demoId.test(entry.name))
@@ -125,6 +130,7 @@ async function readCatalog(root) {
     return {
       id,
       ...readDemoMetadata(html, id),
+      ...demoVariant(id),
       date: id.slice(0, 10),
       url,
       result: result?.trim() ? renderReport(result, url) : null,

@@ -141,35 +141,82 @@ p code, li code, td code {
   list-style: none;
 }
 
-.demo-link {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-content: start;
-  gap: 0.35rem 1rem;
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   min-block-size: 100%;
   padding: 1.25rem 1.5rem;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 0.875rem;
-  color: var(--ink);
+}
+
+.topic-card h3 { margin: 0; font-size: 1.35rem; }
+
+.variant-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding: 0.5rem 0 0;
+  margin: auto 0 0;
+  border-block-start: 1px solid var(--line);
+  list-style: none;
+}
+
+.variant-links li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.5rem;
+}
+
+.variant-link, .pair-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-block-size: 2.75rem;
+  font-weight: 700;
   text-decoration: none;
 }
 
-.demo-link:hover, .demo-link:focus-visible { border-color: var(--accent); }
-.demo-card h3 { margin: 0; font-size: 1.35rem; }
-.demo-link .link-label { text-decoration: underline; text-decoration-thickness: from-font; }
-.demo-link:hover .link-label { text-decoration-thickness: 0.13em; }
-.demo-link .link-arrow { color: var(--accent); }
+.variant-link .link-label, .pair-link .link-label {
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.2em;
+}
+
+.variant-link:hover .link-label, .pair-link:hover .link-label { text-decoration-thickness: 0.13em; }
+.variant-note { color: var(--muted); font-size: 0.875rem; }
+
+.variant-badge {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--code-background);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .demo-description {
-  grid-column: 1 / -1;
   margin: 0;
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
 .demo-meta {
-  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 1rem;
@@ -320,5 +367,5 @@ p code, li code, td code {
 
 @media (max-width: 32rem) {
   .shell { width: calc(100% - 2rem); }
-  .demo-link { padding-inline: 1rem; }
+  .topic-card { padding-inline: 1rem; }
 }

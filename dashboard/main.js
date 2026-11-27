@@ -1,9 +1,14 @@
 import * as initialViews from './views.js';
+import { resolveDemoId } from './legacy-demos.js';
 import './styles.css';
 
 const content = document.querySelector('#content');
 const siteTitle = document.title;
-const demoId = new URLSearchParams(location.search).get('demo');
+const requestedDemoId = new URLSearchParams(location.search).get('demo');
+const demoId = resolveDemoId(requestedDemoId);
+if (demoId !== requestedDemoId) {
+  history.replaceState(null, '', `/?demo=${encodeURIComponent(demoId)}${location.hash}`);
+}
 
 let views = initialViews;
 let catalog;
@@ -58,8 +63,9 @@ function render() {
     updateContent(views.renderCatalogError());
   } else if (catalog && demoId !== null) {
     const demo = catalog.find((entry) => entry.id === demoId);
-    document.title = `${demo?.title ?? '데모를 찾을 수 없습니다'} — ${siteTitle}`;
-    updateContent(demo ? views.renderDetail(demo) : views.renderMissingDemo());
+    const variant = demo?.variant ? ` · ${views.variantLabels[demo.variant]}` : '';
+    document.title = `${demo ? demo.title + variant : '데모를 찾을 수 없습니다'} — ${siteTitle}`;
+    updateContent(demo ? views.renderDetail(demo, catalog) : views.renderMissingDemo());
   } else if (catalog) {
     document.title = siteTitle;
     updateContent(views.renderList(catalog));

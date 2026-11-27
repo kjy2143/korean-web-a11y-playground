@@ -9,3 +9,59 @@
   for = "/demo-catalog.json"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Demo folders deployed before the off/on rebuild.
+[[redirects]]
+  from = "/demos/2026-11-24-login-page/*"
+  to = "/demos/2026-11-27-login-page-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-24-signup-page/*"
+  to = "/demos/2026-11-27-signup-page-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-25-accessible-table/*"
+  to = "/demos/2026-11-27-library-hours-table-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-25-faq-accordion/*"
+  to = "/demos/2026-11-27-faq-accordion-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-25-modal-layer/*"
+  to = "/demos/2026-11-27-modal-layer-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-image-alternatives/*"
+  to = "/demos/2026-11-27-closure-notice-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-new-tab-notice/*"
+  to = "/demos/2026-11-27-resource-links-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-pausable-carousel/*"
+  to = "/demos/2026-11-27-notice-carousel-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-skip-navigation/*"
+  to = "/demos/2026-11-27-library-guide-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-text-contrast/*"
+  to = "/demos/2026-11-27-notice-board-on/"
+  status = 301
+
+[[redirects]]
+  from = "/demos/2026-11-26-video-captions/*"
+  to = "/demos/2026-11-27-facility-video-on/"
+  status = 301
