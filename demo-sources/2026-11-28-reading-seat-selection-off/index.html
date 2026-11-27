@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="푸른숲도서관 열람실의 빈 좌석을 선택하고 예약합니다.">
+  <title>열람실 좌석 선택 - 한국 웹 접근성 플레이그라운드</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="푸른숲도서관 처음으로">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 27V9M16 19c-5 0-8-3-8-8 5 0 8 3 8 8Zm0-4c0-5 3-8 8-8 0 5-3 8-8 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>푸른숲도서관</span>
+      </a>
+      <span class="header-label">열람실 이용</span>
+    </div>
+  </header>
+  <main class="page">
+    <div class="intro">
+      <div>
+        <p class="breadcrumb">홈 <span aria-hidden="true">/</span> 열람실 이용 <span aria-hidden="true">/</span> 좌석 선택</p>
+        <h1>열람실 좌석 선택</h1>
+        <p class="intro-copy">원하는 좌석을 선택하고 예약해 주세요.</p>
+      </div>
+      <div class="availability"><span class="availability-dot" aria-hidden="true"></span>선택 가능 <strong id="available-count">4</strong>석</div>
+    </div>
+    <div class="workspace">
+      <section class="floor-section" aria-labelledby="floor-title">
+        <div class="section-heading">
+          <div><h2 id="floor-title">좌석 배치도</h2><p>좌석을 눌러 선택해 주세요.</p></div>
+          <span class="room-tag">열람실</span>
+        </div>
+        <div class="floor-plan">
+          <div class="plan-top"><span>READING ROOM</span><span>좌석 배치</span></div>
+          <div class="seats" role="group" aria-label="열람실 좌석">
+            <button class="seat" type="button" data-seat="A1" aria-pressed="false"><span class="seat-number">A1</span><span class="seat-status">선택 가능</span></button>
+            <button class="seat" type="button" data-seat="A2" disabled><span class="seat-number">A2</span><span class="seat-status">예약 완료</span></button>
+            <button class="seat" type="button" data-seat="A3" aria-pressed="false"><span class="seat-number">A3</span><span class="seat-status">선택 가능</span></button>
+            <button class="seat" type="button" data-seat="B1" aria-pressed="false"><span class="seat-number">B1</span><span class="seat-status">선택 가능</span></button>
+            <button class="seat" type="button" data-seat="B2" aria-pressed="false"><span class="seat-number">B2</span><span class="seat-status">선택 가능</span></button>
+            <button class="seat" type="button" data-seat="B3" disabled><span class="seat-number">B3</span><span class="seat-status">예약 완료</span></button>
+          </div>
+          <div class="plan-bottom"><span></span>입구<span></span></div>
+        </div>
+        <div class="legend" aria-label="좌석 상태 범례">
+          <span><i class="legend-swatch available" aria-hidden="true"></i>선택 가능</span>
+          <span><i class="legend-swatch reserved" aria-hidden="true"></i>예약 완료</span>
+          <span><i class="legend-swatch selected" aria-hidden="true"></i>현재 선택</span>
+        </div>
+      </section>
+      <aside class="booking" aria-labelledby="booking-title">
+        <h2 id="booking-title">좌석 예약</h2>
+        <p class="booking-copy">선택한 좌석을 확인한 후<br>예약을 진행해 주세요.</p>
+        <div class="selection-label">선택한 좌석</div>
+        <p class="selection-value" id="selection-value" aria-live="polite">선택된 좌석이 없습니다</p>
+        <div class="booking-actions">
+          <button type="button" id="reserve" class="primary" disabled>예약하기 <span aria-hidden="true">→</span></button>
+          <button type="button" id="clear" class="secondary" disabled>선택 해제</button>
+        </div>
+        <p class="notice" id="notice" role="status" aria-live="polite"></p>
+        <p class="demo-note">이 화면은 체험용으로, 실제 예약은 진행되지 않습니다.</p>
+      </aside>
+    </div>
+  </main>
+  <footer><div>푸른숲도서관 <span>·</span> 열람실 좌석 선택</div></footer>
+</body>
+</html>
