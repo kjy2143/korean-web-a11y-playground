@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>공지사항 - 한국 웹 접근성 플레이그라운드</title>
+  <meta name="description" content="공지사항 목록과 강조 공지를 확인합니다.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <p class="site-name">푸른숲도서관</p>
+  </header>
+
+  <main>
+    <h1>공지사항</h1>
+
+    <section class="highlight" aria-labelledby="highlight-title">
+      <h2 id="highlight-title">12월 7일 임시 휴관</h2>
+    </section>
+
+    <section aria-labelledby="list-title">
+      <h2 id="list-title" class="visually-hidden">공지 목록</h2>
+      <ul class="notice-list">
+        <li class="notice">
+          <span class="badge">안내</span>
+          <a class="notice-title" href="#">겨울철 도서관 운영 시간 변경 안내</a>
+          <time class="notice-date" datetime="2026-11-25">2026.11.25</time>
+        </li>
+        <li class="notice">
+          <span class="badge">행사</span>
+          <a class="notice-title" href="#">푸른숲미술관 겨울 기획전 연계 독서 프로그램</a>
+          <time class="notice-date" datetime="2026-11-20">2026.11.20</time>
+        </li>
+        <li class="notice">
+          <span class="badge">모집</span>
+          <a class="notice-title" href="#">2027년 도서관 자원봉사자 모집</a>
+          <time class="notice-date" datetime="2026-11-14">2026.11.14</time>
+        </li>
+        <li class="notice">
+          <span class="badge">안내</span>
+          <a class="notice-title" href="#">장기 연체 도서 반납 안내</a>
+          <time class="notice-date" datetime="2026-11-06">2026.11.06</time>
+        </li>
+        <li class="notice">
+          <span class="badge">행사</span>
+          <a class="notice-title" href="#">어린이 책 읽어 주는 시간 12월 일정</a>
+          <time class="notice-date" datetime="2026-11-02">2026.11.02</time>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

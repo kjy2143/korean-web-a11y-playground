@@ -1,0 +1,26 @@
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  color: #222;
+  background: #fff;
+  line-height: 1.5;
+}
+main { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+h1 { font-size: 1.5rem; margin: 0 0 8px; }
+.lead { margin: 0 0 16px; }
+.table-scroll { overflow-x: auto; }
+.table-scroll:focus-visible { outline: 3px solid #1a56db; outline-offset: 2px; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; }
+caption {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+th, td { border: 1px solid #bbb; padding: 10px 8px; text-align: center; white-space: nowrap; }
+thead th, tbody th { background: #e5e5e5; font-weight: 700; }
+td.closed { background: #fde0e0; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.note { margin: 8px 0 0; font-size: 0.8125rem; color: #aaaaaa; }

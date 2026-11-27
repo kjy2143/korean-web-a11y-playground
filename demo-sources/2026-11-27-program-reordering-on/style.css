@@ -1,0 +1,22 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#f4f7f5;color:#1b2420;line-height:1.5}
+.site-header{padding:12px 16px;background:#1f5d3a;color:#fff;font-weight:700}
+main{max-width:640px;margin:0 auto;padding:24px 16px}
+h1{font-size:1.5rem;margin:0 0 8px}
+.help{margin:0 0 20px;color:#36443d}
+.cards{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.card{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 16px 8px 8px;background:#1e2b26;color:#fff;border-radius:8px;border:2px solid transparent}
+.card h2{font-size:1.125rem;margin:0}
+.meta{margin:2px 0 0;color:#aaaaaa}
+.body{flex:1 1 120px;min-width:0;overflow-wrap:anywhere}
+.actions{display:flex;gap:8px}
+.move{min-width:44px;min-height:44px;padding:0 12px;background:transparent;color:#fff;border:1px solid #fff;border-radius:6px;font:inherit;cursor:pointer}
+.move:focus-visible{outline:3px solid #ffd54f;outline-offset:2px}
+.move:disabled{color:#aaaaaa;border-color:#aaaaaa;border-style:dashed;cursor:default}
+@media (max-width:480px){.actions{flex-basis:100%;padding-left:52px}}
+.handle{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:6px;color:#fff;cursor:grab;touch-action:none}
+.handle svg{width:16px;height:24px;fill:currentColor}
+.card.dragging{opacity:.55}
+.card.over{border-color:#ffd54f;border-style:dashed}
+body.is-dragging,body.is-dragging .handle{cursor:grabbing;user-select:none}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

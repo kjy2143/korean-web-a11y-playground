@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전시 일정 - 한국 웹 접근성 플레이그라운드</title>
+<meta name="description" content="전시 이름과 관람 요일로 전시 일정을 찾습니다.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <p class="org">푸른숲미술관</p>
+</header>
+<main>
+  <h1>전시 일정</h1>
+  <form id="filter" class="filter" role="search" aria-label="전시 검색">
+    <label for="name" class="sr-only">전시 이름 검색</label>
+    <input type="text" id="name" name="name" placeholder="전시 이름 검색" autocomplete="off">
+    <label for="day" class="sr-only">관람 요일</label>
+    <select id="day" name="day">
+      <option value="">요일</option>
+      <option value="수">수</option>
+      <option value="토">토</option>
+      <option value="일">일</option>
+    </select>
+    <button type="submit" class="icon-btn search-btn" aria-label="검색">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button type="reset" class="icon-btn" aria-label="초기화"><span aria-hidden="true">↺</span></button>
+  </form>
+  <p id="count" class="count" role="status">총 4건</p>
+  <ul id="list" class="list"></ul>
+  <p id="empty" class="empty" hidden>조건에 맞는 전시가 없습니다</p>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

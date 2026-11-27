@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>안내 데스크 이용 방법 - 한국 웹 접근성 플레이그라운드</title>
+<meta name="description" content="안내 데스크 호출 벨 소리를 영상으로 알려 줍니다.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">푸른숲도서관</header>
+<main>
+  <h1>안내 데스크 이용 방법</h1>
+  <p>안내 데스크에 직원이 없을 때 벨을 누르세요. 한 번 울리면 일반 문의, 두 번 울리면 긴급 문의입니다.</p>
+  <figure>
+    <div class="player">
+      <video id="video" src="desk-chimes.mp4" playsinline autoplay preload="auto">
+        <track kind="captions" src="desk-chimes.vtt" srclang="ko" label="한국어" default>
+      </video>
+      <button type="button" id="toggle" class="toggle" aria-label="재생">
+        <span class="icon" aria-hidden="true"></span>
+      </button>
+    </div>
+    <figcaption>안내 데스크 호출 벨</figcaption>
+  </figure>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#222;background:#fff;line-height:1.5}
+header,main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:16px 0 8px}
+.lead{margin:0 0 8px;color:#444}
+.notice{margin:0 0 24px;color:#444}
+ul.cards{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.card{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px;border:1px solid #767676;border-radius:8px;text-decoration:none;color:inherit;background:#fff}
+.card:hover{background:#f3f7f4}
+.card:focus-visible{outline:3px solid #0b57d0;outline-offset:2px}
+.card-text{min-width:0}
+.card-title{display:block;font-size:18px;font-weight:700;color:#222;overflow-wrap:anywhere}
+/* 요청서 #999999는 흰 배경 대비 약 2.8:1이라 4.5:1에 못 미쳐 #595959(약 7:1)로 조정 */
+.card-desc{display:block;margin-top:4px;font-size:14px;color:#595959;overflow-wrap:anywhere}
+.card-icon{flex:none;font-size:20px;line-height:1.2;color:#222}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

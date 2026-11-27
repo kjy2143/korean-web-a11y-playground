@@ -1,0 +1,57 @@
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+  background: #fff;
+}
+.site-header { background: #1d5c3a; color: #fff; padding: 14px 20px; }
+.site-name { margin: 0; font-weight: bold; font-size: 18px; }
+main { max-width: 720px; margin: 0 auto; padding: 24px 20px 48px; }
+h1 { font-size: 24px; line-height: 1.4; margin: 0 0 16px; }
+p { margin: 0 0 16px; }
+button { font: inherit; }
+button:focus-visible, input:focus-visible {
+  outline: 3px solid #0b57d0;
+  outline-offset: 2px;
+}
+.btn-open {
+  min-height: 44px; padding: 8px 20px;
+  background: #1d5c3a; color: #fff;
+  border: 2px solid #1d5c3a; border-radius: 6px; cursor: pointer;
+}
+.btn-open:hover { background: #164a2f; }
+
+.notice {
+  position: fixed; inset: 0; margin: auto;
+  width: calc(100% - 32px); max-width: 440px; max-height: calc(100% - 32px);
+  overflow: auto;
+  padding: 24px 20px 16px;
+  border: 0; border-radius: 10px;
+  background: #fff; color: #222;
+}
+.notice::backdrop { background: rgba(0, 0, 0, .6); }
+.notice h2 { font-size: 20px; line-height: 1.4; margin: 0 40px 16px 0; }
+.notice-list { margin: 0 0 20px; padding-left: 20px; }
+.notice-list li { margin-bottom: 8px; }
+.notice-close {
+  position: absolute; top: 8px; right: 8px;
+  width: 44px; height: 44px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; border-radius: 50%;
+  color: #222; cursor: pointer;
+}
+.notice-close:hover { background: #eee; }
+.notice-foot {
+  display: flex; align-items: center; gap: 4px;
+  border-top: 1px solid #ddd; padding-top: 8px;
+}
+.notice-foot input { width: 20px; height: 20px; margin: 0; }
+.notice-foot label {
+  font-size: 12px;
+  /* 시안의 #aaaaaa는 흰 배경 대비 2.3:1이라 같은 12px에서 어두운 회색으로 조정 */
+  color: #666;
+  padding: 12px 8px 12px 4px; cursor: pointer;
+}
