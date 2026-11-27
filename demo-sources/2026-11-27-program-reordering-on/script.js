@@ -1,89 +1,85 @@
 (function () {
-  var list = document.getElementById('cards');
-  var status = document.getElementById('status');
-  var drag = null;
-
+  var list = document.getElementById('list'), live = document.getElementById('live');
+  var drag = null, over = null;
   function cards() { return Array.prototype.slice.call(list.children); }
-  function title(card) { return card.querySelector('h2').textContent; }
-
-  function announce(card) {
-    var all = cards();
-    status.textContent = '';
+  function name(c) { return c.querySelector('h2').textContent; }
+  function say(c) {
+    var a = cards();
+    live.textContent = '';
     setTimeout(function () {
-      status.textContent = title(card) + ', ' + all.length + '개 중 ' + (all.indexOf(card) + 1) + '번째로 이동했습니다.';
-    }, 50);
+      live.textContent = name(c) + ', ' + a.length + '개 중 ' + (a.indexOf(c) + 1) + '번째로 이동했습니다.';
+    }, 30);
   }
-
-  function moveOnto(card, target) {
-    if (card === target) return;
-    var all = cards();
-    if (all.indexOf(card) < all.indexOf(target)) list.insertBefore(card, target.nextSibling);
-    else list.insertBefore(card, target);
-    sync();
-    announce(card);
-  }
-
-  function clearOver() {
-    cards().forEach(function (c) { c.classList.remove('over'); });
-  }
-
-  function cardAt(x, y) {
-    var el = document.elementFromPoint(x, y);
-    var c = el && el.closest ? el.closest('.card') : null;
-    return c && c.parentNode === list ? c : null;
-  }
-
-  list.addEventListener('pointerdown', function (e) {
-    var handle = e.target.closest('.handle');
-    if (!handle || (e.pointerType === 'mouse' && e.button !== 0)) return;
-    var card = handle.closest('.card');
-    drag = { card: card, id: e.pointerId };
-    handle.setPointerCapture(e.pointerId);
-    card.classList.add('dragging');
-    document.body.classList.add('is-dragging');
-  });
-
-  list.addEventListener('pointermove', function (e) {
-    if (!drag || e.pointerId !== drag.id) return;
-    var t = cardAt(e.clientX, e.clientY);
-    clearOver();
-    if (t && t !== drag.card) t.classList.add('over');
-  });
-
-  function end(e, cancel) {
-    if (!drag || e.pointerId !== drag.id) return;
-    var d = drag;
-    drag = null;
-    var t = cancel ? null : cardAt(e.clientX, e.clientY);
-    clearOver();
-    d.card.classList.remove('dragging');
-    document.body.classList.remove('is-dragging');
-    if (t) moveOnto(d.card, t);
-  }
-  list.addEventListener('pointerup', function (e) { end(e, false); });
-  list.addEventListener('pointercancel', function (e) { end(e, true); });
-
-  function sync() {
-    var all = cards();
-    all.forEach(function (c, i) {
-      var b = c.querySelectorAll('.move');
-      b[0].disabled = i === 0;
-      b[1].disabled = i === all.length - 1;
+  function move(c, t, after) { list.insertBefore(c, after ? t.nextSibling : t); }
+  // 맨 위 카드의 위 버튼, 맨 아래 카드의 아래 버튼은 aria-disabled로 표시한다.
+  // disabled 속성은 초점을 잃게 하므로 쓰지 않는다.
+  function refresh() {
+    var a = cards();
+    a.forEach(function (c, i) {
+      c.querySelector('[data-dir="up"]').setAttribute('aria-disabled', i === 0 ? 'true' : 'false');
+      c.querySelector('[data-dir="down"]').setAttribute('aria-disabled', i === a.length - 1 ? 'true' : 'false');
     });
   }
+  function clearDrag() {
+    if (over) over.classList.remove('over');
+    if (drag) { drag.classList.remove('dragging'); drag.querySelector('.grip').style.cursor = ''; }
+    drag = over = null;
+  }
 
-  list.addEventListener('click', function (e) {
-    var btn = e.target.closest('.move');
-    if (!btn) return;
-    var card = btn.closest('.card');
-    var all = cards();
-    var i = all.indexOf(card) + Number(btn.getAttribute('data-dir'));
-    if (i < 0 || i >= all.length) return;
-    moveOnto(card, all[i]);
-    // insertBefore가 카드를 DOM에서 뺐다 다시 넣어 초점이 사라지므로 이동 뒤 초점을 되돌린다.
-    // 누른 버튼이 비활성이 되면(맨 앞·맨 뒤 도달) 같은 카드의 남은 활성 버튼으로 옮긴다.
-    (btn.disabled ? card.querySelector('.move:not(:disabled)') : btn).focus();
+  cards().forEach(function (c) {
+    var g = c.querySelector('.grip');
+
+    // 단일 포인터·키보드 대체 수단: 위·아래 버튼
+    c.querySelectorAll('.mv').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.getAttribute('aria-disabled') === 'true') return;
+        var a = cards(), i = a.indexOf(c);
+        if (b.getAttribute('data-dir') === 'up') move(c, a[i - 1], false);
+        else move(c, a[i + 1], true);
+        refresh();
+        b.focus(); // DOM 이동으로 잃은 초점을 되돌린다.
+        say(c);
+      });
+    });
+
+    // 끌어서 놓기
+    g.addEventListener('pointerdown', function (e) {
+      if (e.button > 0 || drag) return;
+      drag = c;
+      c.classList.add('dragging');
+      g.setPointerCapture(e.pointerId);
+      g.style.cursor = 'grabbing';
+    });
+
+    g.addEventListener('pointermove', function (e) {
+      if (drag !== c) return;
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var t = el && el.closest ? el.closest('.card') : null;
+      if (over && over !== t) over.classList.remove('over');
+      over = (t && t !== c && t.parentNode === list) ? t : null;
+      if (over) over.classList.add('over');
+    });
+
+    function end(e) {
+      if (drag !== c) return;
+      if (over && e.type === 'pointerup') {
+        var a = cards();
+        move(c, over, a.indexOf(over) > a.indexOf(c));
+        refresh();
+        c.classList.add('moved');
+        setTimeout(function () { c.classList.remove('moved'); }, 800);
+        say(c);
+      }
+      clearDrag();
+    }
+    g.addEventListener('pointerup', end);
+    g.addEventListener('pointercancel', end);
   });
 
-  sync();
+  // 끌기 취소(6.5.2): Esc 또는 카드 밖에서 놓기
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drag) clearDrag();
+  });
+
+  refresh();
 })();

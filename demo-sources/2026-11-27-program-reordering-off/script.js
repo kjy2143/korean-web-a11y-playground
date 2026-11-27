@@ -1,76 +1,62 @@
 (function () {
-  var list = document.getElementById('cards');
-  var status = document.getElementById('status');
-  var drag = null;
-
+  var list = document.getElementById('list'), live = document.getElementById('live');
+  var drag = null, over = null;
   function cards() { return Array.prototype.slice.call(list.children); }
-  function title(card) { return card.querySelector('h2').textContent; }
-
-  function announce(card) {
-    var all = cards();
-    status.textContent = '';
+  function name(c) { return c.querySelector('h2').textContent; }
+  function say(c) {
+    var a = cards();
+    live.textContent = '';
     setTimeout(function () {
-      status.textContent = title(card) + ', ' + all.length + '개 중 ' + (all.indexOf(card) + 1) + '번째로 이동했습니다.';
-    }, 50);
+      live.textContent = name(c) + ', ' + a.length + '개 중 ' + (a.indexOf(c) + 1) + '번째로 이동했습니다.';
+    }, 30);
   }
+  function move(c, t, after) { list.insertBefore(c, after ? t.nextSibling : t); }
 
-  function moveOnto(card, target) {
-    if (card === target) return;
-    var all = cards();
-    if (all.indexOf(card) < all.indexOf(target)) list.insertBefore(card, target.nextSibling);
-    else list.insertBefore(card, target);
-    announce(card);
-  }
+  cards().forEach(function (c) {
+    var g = c.querySelector('.grip');
+    g.setAttribute('aria-label', name(c) + ' 순서 바꾸기');
 
-  function clearOver() {
-    cards().forEach(function (c) { c.classList.remove('over'); });
-  }
+    g.addEventListener('keydown', function (e) {
+      var a = cards(), i = a.indexOf(c);
+      if (e.key === 'ArrowUp' && i > 0) { e.preventDefault(); move(c, a[i - 1], false); }
+      else if (e.key === 'ArrowDown' && i < a.length - 1) { e.preventDefault(); move(c, a[i + 1], true); }
+      else return;
+      g.focus();
+      say(c);
+    });
 
-  function cardAt(x, y) {
-    var el = document.elementFromPoint(x, y);
-    var c = el && el.closest ? el.closest('.card') : null;
-    return c && c.parentNode === list ? c : null;
-  }
+    g.addEventListener('pointerdown', function (e) {
+      if (e.button > 0) return;
+      drag = c;
+      c.classList.add('dragging');
+      g.setPointerCapture(e.pointerId);
+      g.style.cursor = 'grabbing';
+    });
 
-  list.addEventListener('pointerdown', function (e) {
-    var handle = e.target.closest('.handle');
-    if (!handle || (e.pointerType === 'mouse' && e.button !== 0)) return;
-    var card = handle.closest('.card');
-    drag = { card: card, id: e.pointerId };
-    handle.setPointerCapture(e.pointerId);
-    card.classList.add('dragging');
-    document.body.classList.add('is-dragging');
-  });
+    g.addEventListener('pointermove', function (e) {
+      if (drag !== c) return;
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var t = el && el.closest ? el.closest('.card') : null;
+      if (over && over !== t) over.classList.remove('over');
+      over = (t && t !== c && t.parentNode === list) ? t : null;
+      if (over) over.classList.add('over');
+    });
 
-  list.addEventListener('pointermove', function (e) {
-    if (!drag || e.pointerId !== drag.id) return;
-    var t = cardAt(e.clientX, e.clientY);
-    clearOver();
-    if (t && t !== drag.card) t.classList.add('over');
-  });
-
-  function end(e, cancel) {
-    if (!drag || e.pointerId !== drag.id) return;
-    var d = drag;
-    drag = null;
-    var t = cancel ? null : cardAt(e.clientX, e.clientY);
-    clearOver();
-    d.card.classList.remove('dragging');
-    document.body.classList.remove('is-dragging');
-    if (t) moveOnto(d.card, t);
-  }
-  list.addEventListener('pointerup', function (e) { end(e, false); });
-  list.addEventListener('pointercancel', function (e) { end(e, true); });
-
-  list.addEventListener('keydown', function (e) {
-    var handle = e.target.closest('.handle');
-    if (!handle || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
-    e.preventDefault();
-    var card = handle.closest('.card');
-    var all = cards();
-    var i = all.indexOf(card) + (e.key === 'ArrowUp' ? -1 : 1);
-    if (i < 0 || i >= all.length) return;
-    moveOnto(card, all[i]);
-    handle.focus();
+    function end(e) {
+      if (drag !== c) return;
+      if (over && e.type === 'pointerup') {
+        var a = cards();
+        move(c, over, a.indexOf(over) > a.indexOf(c));
+        c.classList.add('moved');
+        setTimeout(function () { c.classList.remove('moved'); }, 800);
+        say(c);
+      }
+      if (over) over.classList.remove('over');
+      c.classList.remove('dragging');
+      g.style.cursor = '';
+      drag = over = null;
+    }
+    g.addEventListener('pointerup', end);
+    g.addEventListener('pointercancel', end);
   });
 })();

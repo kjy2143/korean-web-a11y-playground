@@ -1,57 +1,46 @@
 (function () {
-  'use strict';
-
   var INTERVAL = 6000;
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
   var live = document.getElementById('slides');
-  var banner = document.getElementById('banner');
-  var pauseBtn = document.getElementById('pause');
-  var pauseLabel = document.getElementById('pause-label');
-  var current = 0;
-  var timer = null;
+  var toggle = document.getElementById('toggle');
+  var banner = document.querySelector('.banner');
+  var controls = document.querySelector('.controls');
+  var current = 0, timer = null;
   var userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var hovering = false;
-  var focusing = false;
+  var hovering = false, focusing = false;
 
-  function show(index) {
-    current = (index + slides.length) % slides.length;
-    slides.forEach(function (s, i) { s.hidden = i !== current; s.classList.toggle('is-active', i === current); });
-    dots.forEach(function (d, i) {
-      if (i === current) d.setAttribute('aria-current', 'true');
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach(function (s, n) { s.hidden = n !== current; });
+    dots.forEach(function (d, n) {
+      if (n === current) d.setAttribute('aria-current', 'true');
       else d.removeAttribute('aria-current');
     });
   }
-
   function running() { return !userPaused && !hovering && !focusing; }
-
-  function schedule() {
+  function sync() {
     clearInterval(timer);
     timer = null;
-    live.setAttribute('aria-live', running() ? 'off' : 'polite');
     if (running()) timer = setInterval(function () { show(current + 1); }, INTERVAL);
+    live.setAttribute('aria-live', running() ? 'off' : 'polite');
+    toggle.dataset.paused = userPaused ? 'true' : 'false';
+    toggle.setAttribute('aria-label', userPaused ? '자동 전환 시작' : '자동 전환 정지');
   }
+  function go(i) { show(i); sync(); }
 
-  function go(index) { show(index); schedule(); }
+  banner.querySelector('.prev').addEventListener('click', function () { go(current - 1); });
+  banner.querySelector('.next').addEventListener('click', function () { go(current + 1); });
+  dots.forEach(function (d, n) { d.addEventListener('click', function () { go(n); }); });
+  toggle.addEventListener('click', function () { userPaused = !userPaused; sync(); });
 
-  document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
-  document.getElementById('next').addEventListener('click', function () { go(current + 1); });
-  dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
-
-  function syncPauseButton() {
-    pauseBtn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
-    pauseLabel.textContent = userPaused ? '자동 전환 시작' : '자동 전환 정지';
-  }
-  pauseBtn.addEventListener('click', function () { userPaused = !userPaused; syncPauseButton(); schedule(); });
-
-  banner.addEventListener('mouseenter', function () { hovering = true; schedule(); });
-  banner.addEventListener('mouseleave', function () { hovering = false; schedule(); });
-  banner.addEventListener('focusin', function () { focusing = true; schedule(); });
-  banner.addEventListener('focusout', function (e) {
-    if (!banner.contains(e.relatedTarget)) { focusing = false; schedule(); }
+  [banner, controls].forEach(function (el) {
+    el.addEventListener('mouseenter', function () { hovering = true; sync(); });
+    el.addEventListener('mouseleave', function () { hovering = false; sync(); });
+    el.addEventListener('focusin', function () { focusing = true; sync(); });
+    el.addEventListener('focusout', function () { focusing = false; sync(); });
   });
 
-  syncPauseButton();
   show(0);
-  schedule();
+  sync();
 })();

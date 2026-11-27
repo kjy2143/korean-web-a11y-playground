@@ -8,25 +8,16 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">푸른숲도서관</header>
+<header class="site"><p>푸른숲도서관</p></header>
 <main>
-  <h1>관심 프로그램</h1>
-  <p class="help" id="help">카드 왼쪽 손잡이를 끌어 다른 카드 위에 놓으면 순서가 바뀝니다. 키보드에서는 손잡이에 초점을 두고 위쪽·아래쪽 화살표 키를 누릅니다.</p>
-  <ol class="cards" id="cards" aria-describedby="help">
-    <li class="card">
-      <button type="button" class="handle" aria-label="그림책 읽기 순서 이동"><svg viewBox="0 0 16 24" aria-hidden="true" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></button>
-      <div class="body"><h2>그림책 읽기</h2><p class="meta">토 10:00 · 어린이실</p></div>
-    </li>
-    <li class="card">
-      <button type="button" class="handle" aria-label="동네 사진 산책 순서 이동"><svg viewBox="0 0 16 24" aria-hidden="true" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></button>
-      <div class="body"><h2>동네 사진 산책</h2><p class="meta">일 14:00 · 1층 로비</p></div>
-    </li>
-    <li class="card">
-      <button type="button" class="handle" aria-label="겨울 글쓰기 모임 순서 이동"><svg viewBox="0 0 16 24" aria-hidden="true" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></button>
-      <div class="body"><h2>겨울 글쓰기 모임</h2><p class="meta">수 19:00 · 세미나실</p></div>
-    </li>
-  </ol>
-  <p class="sr-only" id="status" role="status" aria-live="polite"></p>
+<h1>관심 프로그램</h1>
+<p class="help" id="help">손잡이를 끌어 다른 카드 위에 놓으면 순서가 바뀝니다. 키보드에서는 손잡이에 초점을 두고 위·아래 화살표 키를 누릅니다.</p>
+<ol class="list" id="list">
+<li class="card"><button type="button" class="grip" aria-describedby="help"><svg viewBox="0 0 12 18" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></button><div class="body"><h2>그림책 읽기</h2><p class="meta">토 10:00 · 어린이실</p></div></li>
+<li class="card"><button type="button" class="grip" aria-describedby="help"><svg viewBox="0 0 12 18" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></button><div class="body"><h2>동네 사진 산책</h2><p class="meta">일 14:00 · 1층 로비</p></div></li>
+<li class="card"><button type="button" class="grip" aria-describedby="help"><svg viewBox="0 0 12 18" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></button><div class="body"><h2>겨울 글쓰기 모임</h2><p class="meta">수 19:00 · 세미나실</p></div></li>
+</ol>
+<p class="sr" role="status" id="live"></p>
 </main>
 <script src="script.js"></script>
 </body>

@@ -8,28 +8,37 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">푸른숲도서관</header>
+<header class="site"><p>푸른숲도서관</p></header>
 <main>
-  <h1>관심 프로그램</h1>
-  <p class="help" id="help">카드 왼쪽 손잡이를 끌어 다른 카드 위에 놓으면 순서가 바뀝니다. 끌기 대신 각 카드의 위로·아래로 버튼으로도 바꿀 수 있습니다.</p>
-  <ol class="cards" id="cards" aria-describedby="help">
-    <li class="card">
-      <span class="handle" aria-hidden="true"><svg viewBox="0 0 16 24" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></span>
-      <div class="body"><h2>그림책 읽기</h2><p class="meta">토 10:00 · 어린이실</p></div>
-      <div class="actions"><button type="button" class="move" data-dir="-1">위로<span class="sr-only"> 이동, 그림책 읽기</span></button><button type="button" class="move" data-dir="1">아래로<span class="sr-only"> 이동, 그림책 읽기</span></button></div>
-    </li>
-    <li class="card">
-      <span class="handle" aria-hidden="true"><svg viewBox="0 0 16 24" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></span>
-      <div class="body"><h2>동네 사진 산책</h2><p class="meta">일 14:00 · 1층 로비</p></div>
-      <div class="actions"><button type="button" class="move" data-dir="-1">위로<span class="sr-only"> 이동, 동네 사진 산책</span></button><button type="button" class="move" data-dir="1">아래로<span class="sr-only"> 이동, 동네 사진 산책</span></button></div>
-    </li>
-    <li class="card">
-      <span class="handle" aria-hidden="true"><svg viewBox="0 0 16 24" focusable="false"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="11" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="11" cy="19" r="2"/></svg></span>
-      <div class="body"><h2>겨울 글쓰기 모임</h2><p class="meta">수 19:00 · 세미나실</p></div>
-      <div class="actions"><button type="button" class="move" data-dir="-1">위로<span class="sr-only"> 이동, 겨울 글쓰기 모임</span></button><button type="button" class="move" data-dir="1">아래로<span class="sr-only"> 이동, 겨울 글쓰기 모임</span></button></div>
-    </li>
-  </ol>
-  <p class="sr-only" id="status" role="status" aria-live="polite"></p>
+<h1>관심 프로그램</h1>
+<p class="help">점 여섯 개 손잡이를 끌어 다른 카드 위에 놓거나, 카드 오른쪽의 위·아래 버튼을 눌러 순서를 바꿉니다. 끌기를 취소하려면 Esc 키를 누르거나 카드 밖에서 놓습니다.</p>
+<ol class="list" id="list">
+<li class="card">
+<span class="grip" aria-hidden="true"><svg viewBox="0 0 12 18" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></span>
+<div class="body"><h2>그림책 읽기</h2><p class="meta">토 10:00 · 어린이실</p></div>
+<div class="moves">
+<button type="button" class="mv" data-dir="up" aria-label="그림책 읽기 위로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 6.5 6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+<button type="button" class="mv" data-dir="down" aria-label="그림책 읽기 아래로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+</div>
+</li>
+<li class="card">
+<span class="grip" aria-hidden="true"><svg viewBox="0 0 12 18" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></span>
+<div class="body"><h2>동네 사진 산책</h2><p class="meta">일 14:00 · 1층 로비</p></div>
+<div class="moves">
+<button type="button" class="mv" data-dir="up" aria-label="동네 사진 산책 위로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 6.5 6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+<button type="button" class="mv" data-dir="down" aria-label="동네 사진 산책 아래로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+</div>
+</li>
+<li class="card">
+<span class="grip" aria-hidden="true"><svg viewBox="0 0 12 18" focusable="false"><g fill="currentColor"><circle cx="3" cy="3" r="1.6"/><circle cx="9" cy="3" r="1.6"/><circle cx="3" cy="9" r="1.6"/><circle cx="9" cy="9" r="1.6"/><circle cx="3" cy="15" r="1.6"/><circle cx="9" cy="15" r="1.6"/></g></svg></span>
+<div class="body"><h2>겨울 글쓰기 모임</h2><p class="meta">수 19:00 · 세미나실</p></div>
+<div class="moves">
+<button type="button" class="mv" data-dir="up" aria-label="겨울 글쓰기 모임 위로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 6.5 6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+<button type="button" class="mv" data-dir="down" aria-label="겨울 글쓰기 모임 아래로 이동"><svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+</div>
+</li>
+</ol>
+<p class="sr" role="status" id="live"></p>
 </main>
 <script src="script.js"></script>
 </body>

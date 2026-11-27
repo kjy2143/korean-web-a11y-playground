@@ -3,22 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>안내 데스크 이용 방법 - 한국 웹 접근성 플레이그라운드</title>
+<title>안내 데스크 호출 벨 - 한국 웹 접근성 플레이그라운드</title>
 <meta name="description" content="안내 데스크 호출 벨 소리를 영상으로 알려 줍니다.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">푸른숲도서관</header>
+<header class="site-header"><p>푸른숲도서관</p></header>
 <main>
-  <h1>안내 데스크 이용 방법</h1>
-  <p>안내 데스크에 직원이 없을 때 벨을 누르세요. 한 번 울리면 일반 문의, 두 번 울리면 긴급 문의입니다.</p>
-  <figure>
-    <div class="player">
-      <video id="video" src="desk-chimes.mp4" playsinline preload="metadata">
+  <h1>안내 데스크 호출 벨</h1>
+  <p class="lead">안내 데스크에 직원이 없을 때 벨을 누르세요. 한 번 울리면 일반 문의, 두 번 울리면 긴급 문의입니다.</p>
+  <figure class="player">
+    <div class="stage">
+      <video id="video" preload="metadata" playsinline aria-label="안내 데스크 호출 벨 소리 안내 영상">
+        <source src="desk-chimes.mp4" type="video/mp4">
         <track kind="captions" src="desk-chimes.vtt" srclang="ko" label="한국어" default>
+        이 브라우저는 영상을 재생할 수 없습니다.
       </video>
-      <button type="button" id="toggle" class="toggle" aria-label="안내 데스크 호출 벨 영상 재생">
-        <span class="icon" aria-hidden="true"></span>
+      <button type="button" id="toggle" class="toggle" aria-label="재생">
+        <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon icon-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
       </button>
     </div>
     <figcaption>안내 데스크 호출 벨</figcaption>

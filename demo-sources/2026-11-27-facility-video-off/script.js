@@ -1,28 +1,33 @@
 (function () {
   var video = document.getElementById('video');
   var btn = document.getElementById('toggle');
+  var stage = btn.parentNode;
+  var status = document.getElementById('status');
 
   function sync() {
     var playing = !video.paused && !video.ended;
-    btn.classList.toggle('is-playing', playing);
-    btn.setAttribute('aria-label', playing ? '일시정지' : '재생');
+    stage.classList.toggle('is-playing', playing);
+    btn.setAttribute('aria-label', playing ? '일시정지' : (video.ended ? '다시 재생' : '재생'));
   }
-
-  function play() {
-    var p = video.play();
-    if (p && p.catch) p.catch(sync);
+  function toggle() {
+    if (video.paused || video.ended) {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    } else {
+      video.pause();
+    }
   }
-
-  btn.addEventListener('click', function () {
-    if (video.paused || video.ended) play();
-    else video.pause();
-  });
-
-  ['play', 'playing', 'pause', 'ended'].forEach(function (e) {
-    video.addEventListener(e, sync);
-  });
-
-  // 소리 포함 자동 재생이 브라우저에서 막히면 재생 아이콘이 그대로 남는다.
-  play();
+  btn.addEventListener('click', toggle);
+  video.addEventListener('click', toggle);
+  ['play', 'pause', 'ended', 'playing'].forEach(function (e) { video.addEventListener(e, sync); });
   sync();
+
+  // 소리와 함께 자동 재생을 시도한다. 브라우저가 막으면 재생 버튼이 보이는 상태로 남는다.
+  var p = video.play();
+  if (p && p.catch) {
+    p.catch(function () {
+      sync();
+      status.textContent = '브라우저 정책으로 자동 재생되지 않았습니다. 재생 버튼을 눌러 주세요.';
+    });
+  }
 })();

@@ -1,119 +1,69 @@
 (function () {
-  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('signup-form'), summary = $('error-summary');
+  var all = $('agree-all'), news = $('agree-news');
+  var boxes = [$('agree-terms'), $('agree-privacy'), news];
+  var errId = { 'agree-terms': 'terms-err', 'agree-privacy': 'privacy-err' };
 
-  var form = document.getElementById('signup-form');
-  var summary = document.getElementById('error-summary');
-  var summaryTitle = document.getElementById('summary-title');
-  var summaryList = document.getElementById('summary-list');
-  var agreeAll = document.getElementById('agree-all');
-  var terms = document.getElementById('agree-terms');
-  var privacy = document.getElementById('agree-privacy');
-  var news = document.getElementById('agree-news');
-  var termsError = document.getElementById('terms-error');
-  var submitted = false;
-
-  var fields = {
-    userid: { el: document.getElementById('userid') },
-    password: { el: document.getElementById('password') },
-    password2: { el: document.getElementById('password2') },
-    email: { el: document.getElementById('email') }
-  };
-
-  function check(name) {
-    var v = fields[name].el.value;
-    if (name === 'userid') {
-      if (!v) return '아이디를 입력해 주세요.';
-      if (!/^[a-z0-9]{4,12}$/.test(v)) return '아이디는 영문 소문자와 숫자만 써서 4~12자로 입력해 주세요.';
-    } else if (name === 'password') {
-      if (!v) return '비밀번호를 입력해 주세요.';
-      if (v.length < 8) return '비밀번호는 8자 이상 입력해 주세요.';
-    } else if (name === 'password2') {
-      if (!v) return '비밀번호 확인을 입력해 주세요.';
-      if (v !== fields.password.el.value) return '비밀번호가 서로 다릅니다. 같은 비밀번호를 입력해 주세요.';
-    } else if (name === 'email') {
-      if (!v) return '이메일을 입력해 주세요.';
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return '이메일 형식이 올바르지 않습니다. 예: name@example.com';
-    }
-    return '';
+  function setErr(input, msg) {
+    var p = $(errId[input.id] || input.id + '-err');
+    p.textContent = msg || '';
+    if (msg) input.setAttribute('aria-invalid', 'true');
+    else input.removeAttribute('aria-invalid');
   }
 
-  function show(name) {
-    var msg = check(name);
-    var el = fields[name].el;
-    document.getElementById(name + '-error').textContent = msg;
-    if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
-    return msg;
+  function validate() {
+    var errs = [];
+    function add(input, msg) { setErr(input, msg); if (msg) errs.push({ input: input, msg: msg }); }
+    var id = $('userid').value, pw = $('pw').value, pw2 = $('pw2').value, em = $('email').value.trim();
+    add($('userid'), !id ? '아이디를 입력해 주세요.' : !/^[a-z0-9]{4,12}$/.test(id) ? '아이디는 영문 소문자와 숫자 4~12자로 입력해 주세요.' : '');
+    add($('pw'), !pw ? '비밀번호를 입력해 주세요.' : pw.length < 8 ? '비밀번호는 8자 이상 입력해 주세요.' : '');
+    add($('pw2'), !pw2 ? '비밀번호 확인을 입력해 주세요.' : pw2 !== pw ? '비밀번호가 일치하지 않습니다.' : '');
+    add($('email'), !em ? '이메일을 입력해 주세요.' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em) ? '이메일 형식이 올바르지 않습니다. 예: name@example.com' : '');
+    add($('agree-terms'), $('agree-terms').checked ? '' : '이용약관에 동의해 주세요.');
+    add($('agree-privacy'), $('agree-privacy').checked ? '' : '개인정보 수집·이용에 동의해 주세요.');
+    return errs;
   }
 
-  function checkTerms() {
-    var missing = [];
-    if (!terms.checked) missing.push('이용약관');
-    if (!privacy.checked) missing.push('개인정보 수집·이용');
-    var msg = missing.length ? '필수 약관에 동의해 주세요: ' + missing.join(', ') : '';
-    termsError.textContent = msg;
-    [terms, privacy].forEach(function (c) {
-      if (!c.checked) { c.setAttribute('aria-invalid', 'true'); c.parentNode.classList.add('invalid'); }
-      else { c.removeAttribute('aria-invalid'); c.parentNode.classList.remove('invalid'); }
+  function showSummary(errs) {
+    summary.textContent = '';
+    if (!errs.length) { summary.hidden = true; return; }
+    var p = document.createElement('p');
+    p.textContent = '입력 내용을 확인해 주세요. (' + errs.length + '건)';
+    var ul = document.createElement('ul');
+    errs.forEach(function (e) {
+      var li = document.createElement('li'), a = document.createElement('a');
+      a.href = '#' + e.input.id;
+      a.textContent = e.msg;
+      a.addEventListener('click', function (ev) { ev.preventDefault(); e.input.focus(); });
+      li.appendChild(a);
+      ul.appendChild(li);
     });
-    return msg;
+    summary.appendChild(p);
+    summary.appendChild(ul);
+    summary.hidden = false;
   }
 
-  agreeAll.addEventListener('change', function () {
-    [terms, privacy, news].forEach(function (c) { c.checked = agreeAll.checked; });
-    if (submitted) checkTerms();
+  all.addEventListener('change', function () {
+    boxes.forEach(function (b) { b.checked = all.checked; if (b.checked) setErr(b, ''); });
   });
-  [terms, privacy, news].forEach(function (c) {
-    c.addEventListener('change', function () {
-      agreeAll.checked = terms.checked && privacy.checked && news.checked;
-      if (submitted) checkTerms();
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      all.checked = boxes.every(function (x) { return x.checked; });
+      if (b.checked) setErr(b, '');
     });
   });
 
-  Object.keys(fields).forEach(function (name) {
-    fields[name].el.addEventListener('input', function () {
-      if (!submitted) return;
-      show(name);
-      if (name === 'password' && fields.password2.el.value) show('password2');
-    });
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    submitted = true;
-    var errors = [];
-    Object.keys(fields).forEach(function (name) {
-      var msg = show(name);
-      if (msg) errors.push({ id: fields[name].el.id, text: msg });
-    });
-    var tmsg = checkTerms();
-    if (tmsg) errors.push({ id: 'agree-terms', text: tmsg });
-
-    if (errors.length) {
-      summaryTitle.textContent = '입력 내용을 확인해 주세요. 고칠 항목이 ' + errors.length + '개 있습니다.';
-      summaryList.textContent = '';
-      errors.forEach(function (er) {
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.href = '#' + er.id;
-        a.textContent = er.text;
-        a.addEventListener('click', function (ev) {
-          ev.preventDefault();
-          document.getElementById(er.id).focus();
-        });
-        li.appendChild(a);
-        summaryList.appendChild(li);
-      });
-      summary.hidden = false;
-      summary.focus();
-      return;
-    }
-
-    summary.hidden = true;
-    document.getElementById('done-message').textContent =
-      fields.userid.el.value + ' 님, 회원가입을 환영합니다. 안내 메일은 ' + fields.email.el.value + ' 로 보냅니다.';
-    document.getElementById('signup-view').hidden = true;
-    document.getElementById('done-view').hidden = false;
-    document.getElementById('done-title').focus();
-    window.scrollTo(0, 0);
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var errs = validate();
+    showSummary(errs);
+    if (errs.length) { summary.focus(); return; }
+    $('done-id').textContent = $('userid').value;
+    $('done-news').textContent = news.checked ? '소식 메일을 받도록 설정되었습니다.' : '';
+    $('signup-view').hidden = true;
+    $('done-view').hidden = false;
+    document.title = '가입 완료 - 한국 웹 접근성 플레이그라운드';
+    $('done-title').focus();
   });
 })();

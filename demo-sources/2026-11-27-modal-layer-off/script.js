@@ -1,48 +1,34 @@
 (function () {
-  var KEY = 'notice-hidden-date';
-  var dlg = document.getElementById('notice');
+  var dialog = document.getElementById('notice');
   var openBtn = document.getElementById('open-notice');
-  var closeBtn = document.getElementById('notice-x');
+  var closeX = document.getElementById('close-x');
   var skip = document.getElementById('skip-today');
+  var KEY = 'noticeHiddenDate';
 
   function today() {
     var d = new Date();
-    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
-  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
-  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
-
+  function hiddenToday() {
+    try { return localStorage.getItem(KEY) === today(); } catch (e) { return false; }
+  }
   function open() {
     skip.checked = false;
-    dlg.showModal();
+    if (!dialog.open) dialog.showModal();
   }
   function close() {
-    if (skip.checked) write(today());
-    dlg.close();
+    if (skip.checked) {
+      try { localStorage.setItem(KEY, today()); } catch (e) {}
+    }
+    dialog.close();
   }
 
   openBtn.addEventListener('click', open);
-  closeBtn.addEventListener('click', close);
+  closeX.addEventListener('click', close);
+  // Esc도 같은 닫기 경로를 쓴다
+  dialog.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+  // 창 바깥(backdrop) 클릭: 클릭 대상이 dialog 자체일 때만 닫는다
+  dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); });
 
-  // Esc 키: 체크 상태를 그대로 반영해 닫는다.
-  dlg.addEventListener('cancel', function (e) {
-    e.preventDefault();
-    close();
-  });
-  // 창 바깥(백드롭) 클릭
-  dlg.addEventListener('click', function (e) {
-    if (e.target !== dlg) return;
-    var r = dlg.getBoundingClientRect();
-    var inside = e.clientX >= r.left && e.clientX <= r.right &&
-                 e.clientY >= r.top && e.clientY <= r.bottom;
-    if (!inside) close();
-  });
-  // 닫힌 뒤 초점은 항상 열기 버튼으로 돌린다.
-  dlg.addEventListener('close', function () { openBtn.focus(); });
-
-  if (read() !== today()) {
-    if (read()) clear();
-    open();
-  }
+  if (!hiddenToday()) open();
 })();

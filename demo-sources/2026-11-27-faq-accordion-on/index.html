@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -9,29 +9,29 @@
 </head>
 <body>
 <header class="site-header"><p class="site-name">푸른숲도서관</p></header>
-<main>
+<main id="main" class="wrap">
   <h1>자주 묻는 질문</h1>
-  <p class="lead">궁금한 질문을 누르면 답이 펼쳐집니다.</p>
-  <ul class="faq" id="faq">
+  <p class="lead">질문을 누르면 답이 펼쳐지고, 다시 누르면 접힙니다.</p>
+  <ul class="faq">
     <li class="item">
-      <h2><button type="button" class="q" id="q1" aria-expanded="false" aria-controls="a1"><span class="mark" aria-hidden="true">Q</span><span class="q-text">회원증은 어떻게 발급받나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
-      <div class="a" id="a1" role="region" aria-labelledby="q1" hidden><span class="mark" aria-hidden="true">A</span><p>신분증을 가지고 도서관 종합자료실 안내데스크를 방문하면 현장에서 바로 발급받을 수 있습니다. 누리집에서 가입한 뒤 모바일 회원증을 받을 수도 있습니다. <a href="#">바로가기<span class="sr-only">: 회원증 발급 안내</span></a></p></div>
+      <h2 class="q"><button type="button" class="trigger" id="q1" aria-expanded="false" aria-controls="a1"><span class="mark" aria-hidden="true">Q</span><span class="text">회원증은 어떻게 발급받나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
+      <div class="panel" id="a1" role="region" aria-labelledby="q1" hidden><p><span class="mark" aria-hidden="true">A</span><span class="text">신분증을 가지고 도서관 1층 안내데스크를 방문하시면 현장에서 바로 발급받을 수 있습니다. 온라인으로 가입한 뒤 모바일 회원증을 사용할 수도 있습니다. <a href="#">바로가기<span class="sr-only">: 회원증 발급 안내</span></a></span></p></div>
     </li>
     <li class="item">
-      <h2><button type="button" class="q" id="q2" aria-expanded="false" aria-controls="a2"><span class="mark" aria-hidden="true">Q</span><span class="q-text">대출은 몇 권, 며칠 동안 가능한가요?</span><span class="icon" aria-hidden="true"></span></button></h2>
-      <div class="a" id="a2" role="region" aria-labelledby="q2" hidden><span class="mark" aria-hidden="true">A</span><p>한 사람이 최대 5권을 14일 동안 빌릴 수 있습니다. 다른 이용자의 예약이 없으면 한 번에 한해 7일 연장할 수 있습니다. <a href="#">바로가기<span class="sr-only">: 대출 권수와 기간 안내</span></a></p></div>
+      <h2 class="q"><button type="button" class="trigger" id="q2" aria-expanded="false" aria-controls="a2"><span class="mark" aria-hidden="true">Q</span><span class="text">대출 권수와 기간은 어떻게 되나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
+      <div class="panel" id="a2" role="region" aria-labelledby="q2" hidden><p><span class="mark" aria-hidden="true">A</span><span class="text">1인당 최대 5권을 14일 동안 빌릴 수 있습니다. 다른 이용자의 예약이 없으면 7일 연장할 수 있습니다. <a href="#">바로가기<span class="sr-only">: 대출 권수와 기간 안내</span></a></span></p></div>
     </li>
     <li class="item">
-      <h2><button type="button" class="q" id="q3" aria-expanded="false" aria-controls="a3"><span class="mark" aria-hidden="true">Q</span><span class="q-text">도서가 연체되면 어떻게 되나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
-      <div class="a" id="a3" role="region" aria-labelledby="q3" hidden><span class="mark" aria-hidden="true">A</span><p>연체한 일수만큼 새 도서를 빌릴 수 없습니다. 연체 도서를 반납하면 그다음 날부터 대출 정지 기간이 계산됩니다. <a href="#">바로가기<span class="sr-only">: 연체 안내</span></a></p></div>
+      <h2 class="q"><button type="button" class="trigger" id="q3" aria-expanded="false" aria-controls="a3"><span class="mark" aria-hidden="true">Q</span><span class="text">연체하면 어떻게 되나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
+      <div class="panel" id="a3" role="region" aria-labelledby="q3" hidden><p><span class="mark" aria-hidden="true">A</span><span class="text">연체한 일수만큼 새로 빌릴 수 없습니다. 도서를 반납하면 다음 날부터 연체 일수가 계산됩니다. <a href="#">바로가기<span class="sr-only">: 연체 안내</span></a></span></p></div>
     </li>
     <li class="item">
-      <h2><button type="button" class="q" id="q4" aria-expanded="false" aria-controls="a4"><span class="mark" aria-hidden="true">Q</span><span class="q-text">열람실 좌석은 어떻게 예약하나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
-      <div class="a" id="a4" role="region" aria-labelledby="q4" hidden><span class="mark" aria-hidden="true">A</span><p>누리집이나 열람실 입구의 무인 단말기에서 예약할 수 있습니다. 예약한 좌석은 30분 안에 입실하지 않으면 자동으로 취소됩니다. <a href="#">바로가기<span class="sr-only">: 열람실 예약 안내</span></a></p></div>
+      <h2 class="q"><button type="button" class="trigger" id="q4" aria-expanded="false" aria-controls="a4"><span class="mark" aria-hidden="true">Q</span><span class="text">열람실은 어떻게 예약하나요?</span><span class="icon" aria-hidden="true"></span></button></h2>
+      <div class="panel" id="a4" role="region" aria-labelledby="q4" hidden><p><span class="mark" aria-hidden="true">A</span><span class="text">누리집이나 모바일 앱에서 회원 로그인 후 원하는 날짜와 좌석을 선택해 예약합니다. 예약 시간이 지나 20분 안에 입실하지 않으면 자동으로 취소됩니다. <a href="#">바로가기<span class="sr-only">: 열람실 예약 안내</span></a></span></p></div>
     </li>
     <li class="item">
-      <h2><button type="button" class="q" id="q5" aria-expanded="false" aria-controls="a5"><span class="mark" aria-hidden="true">Q</span><span class="q-text">빌린 도서를 잃어버렸어요.</span><span class="icon" aria-hidden="true"></span></button></h2>
-      <div class="a" id="a5" role="region" aria-labelledby="q5" hidden><span class="mark" aria-hidden="true">A</span><p>먼저 도서관에 분실 사실을 알려 주세요. 같은 책으로 변상하거나, 같은 책을 구하기 어려우면 도서관이 정한 방법으로 배상합니다. <a href="#">바로가기<span class="sr-only">: 분실 도서 안내</span></a></p></div>
+      <h2 class="q"><button type="button" class="trigger" id="q5" aria-expanded="false" aria-controls="a5"><span class="mark" aria-hidden="true">Q</span><span class="text">빌린 도서를 분실했어요.</span><span class="icon" aria-hidden="true"></span></button></h2>
+      <div class="panel" id="a5" role="region" aria-labelledby="q5" hidden><p><span class="mark" aria-hidden="true">A</span><span class="text">먼저 도서관에 분실 사실을 알려 주세요. 같은 책으로 변상하거나 정가에 해당하는 금액을 내시면 됩니다. <a href="#">바로가기<span class="sr-only">: 분실 도서 안내</span></a></span></p></div>
     </li>
   </ul>
 </main>

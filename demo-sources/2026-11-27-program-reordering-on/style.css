@@ -1,22 +1,26 @@
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#f4f7f5;color:#1b2420;line-height:1.5}
-.site-header{padding:12px 16px;background:#1f5d3a;color:#fff;font-weight:700}
-main{max-width:640px;margin:0 auto;padding:24px 16px}
+body{margin:0;font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;background:#f4f6f5;color:#1a1a1a;line-height:1.5}
+.site{background:#1f5c3f;color:#fff;padding:12px 16px;font-weight:700}
+.site p{margin:0}
+main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
 h1{font-size:1.5rem;margin:0 0 8px}
-.help{margin:0 0 20px;color:#36443d}
-.cards{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.card{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 16px 8px 8px;background:#1e2b26;color:#fff;border-radius:8px;border:2px solid transparent}
-.card h2{font-size:1.125rem;margin:0}
-.meta{margin:2px 0 0;color:#aaaaaa}
-.body{flex:1 1 120px;min-width:0;overflow-wrap:anywhere}
-.actions{display:flex;gap:8px}
-.move{min-width:44px;min-height:44px;padding:0 12px;background:transparent;color:#fff;border:1px solid #fff;border-radius:6px;font:inherit;cursor:pointer}
-.move:focus-visible{outline:3px solid #ffd54f;outline-offset:2px}
-.move:disabled{color:#aaaaaa;border-color:#aaaaaa;border-style:dashed;cursor:default}
-@media (max-width:480px){.actions{flex-basis:100%;padding-left:52px}}
-.handle{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:6px;color:#fff;cursor:grab;touch-action:none}
-.handle svg{width:16px;height:24px;fill:currentColor}
-.card.dragging{opacity:.55}
-.card.over{border-color:#ffd54f;border-style:dashed}
-body.is-dragging,body.is-dragging .handle{cursor:grabbing;user-select:none}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.help{margin:0 0 16px;color:#333;font-size:.9375rem}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.card{display:flex;align-items:center;gap:8px;background:#222b27;color:#fff;border:2px solid #222b27;border-radius:8px;padding:6px 6px 6px 6px}
+.card h2{font-size:1.0625rem;margin:0}
+.meta{margin:2px 0 0;color:#aaaaaa;font-size:.9375rem}
+.body{min-width:0;flex:1}
+.grip{flex:none;width:44px;height:44px;display:grid;place-items:center;color:#fff;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.grip svg{width:14px;height:21px}
+.moves{flex:none;display:flex;gap:4px}
+.mv{width:44px;height:44px;display:grid;place-items:center;background:#34403b;border:1px solid #8a948f;border-radius:6px;color:#fff;cursor:pointer;padding:0}
+.mv svg{width:16px;height:11px}
+.mv:hover{background:#43524b}
+.mv:focus-visible{outline:3px solid #ffd54a;outline-offset:2px}
+.mv[aria-disabled="true"]{background:none;border-style:dashed;color:#9aa49f;cursor:not-allowed}
+.card.dragging{opacity:.55;outline:2px dashed #fff;outline-offset:2px}
+.card.over{box-shadow:0 0 0 3px #ffd54a;border-style:dashed;border-color:#ffd54a}
+.card.moved{animation:fl .8s}
+@keyframes fl{from{box-shadow:0 0 0 3px #ffd54a}to{box-shadow:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.card.moved{animation:none}}
