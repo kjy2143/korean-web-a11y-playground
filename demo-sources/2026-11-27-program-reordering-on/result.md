@@ -67,7 +67,7 @@
 - 카드를 배경과 간격으로 구분합니다. [5.4.4 콘텐츠 간의 구분](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-5.4.4.json)
 - 버튼이 기본 `button`이라 Tab, Enter, Space로 동작합니다. [6.1.1 키보드 사용 보장](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.1.json)
 - 버튼에 노란 초점 윤곽선을 두었습니다. 이동 뒤 누른 버튼이 활성이면 그 버튼에, 비활성이 되면 같은 카드의 다른 버튼에 초점을 둡니다. 활성인 경우의 처리는 검증 뒤 수정으로 더했습니다. [6.1.2 초점 이동과 표시](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.2.json)
-- 버튼은 최소 44×44px이고 버튼 사이 간격은 8px입니다. 보고서는 컨트롤 크기를 본문이 ‘바람직’으로 쓴 부분으로 구분했습니다. [6.1.3 조작 가능](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.3.json)
+- 이웃한 이동 버튼을 하나씩 선택해 쓸 수 있도록 버튼을 최소 44×44px로 만들고 버튼 사이에 8px 간격을 두었습니다. 크기 수치는 아래 권장 사항에 적었습니다. [6.1.3 조작 가능](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.3.json)
 - 페이지 `title`, `h1`, 카드별 `h2`가 있습니다. [6.4.2 제목 제공](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.4.2.json)
 - 끌어서 놓기의 대체 수단으로 버튼을 제공했습니다. [6.5.1 단일 포인터 입력 지원](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.5.1.json)
 - 포인터를 뗄 때만 이동이 실행되고, 카드 밖에서 놓으면 취소됩니다. [6.5.2 포인터 입력 취소](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.5.2.json)
@@ -82,6 +82,7 @@
 
 - 끌어서 놓기의 대체 수단(6.5.1)은 NIA 2.5.1의 사례를 참고했습니다. [적용 사례](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-2.5.1-s4.json), [개선 필요 사례](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-2.5.1-s5.json)
 - 보고서는 NIA 2.1.1 키보드 사용 보장의 사례 레코드도 읽었다고 적었지만, 적용 항목과 연결하지 않았습니다.
+- 6.1.3의 크기 수치(대각선 6mm 이상, PC 17×17px·모바일 24×24px 이상, 이웃한 콘트롤 사이 1px 이상 간격)는 KWCAG 본문에서도 ‘바람직하다’ 수준이고, NIA 기본 규칙이 정한 권장 사항입니다. 버튼 크기와 간격은 이 수치보다 큽니다. [NIA 2.1.3 기본 규칙](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-2.1.3-s3.json)
 
 ### 자료 밖 근거
 

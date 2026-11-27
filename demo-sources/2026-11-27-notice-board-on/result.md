@@ -69,13 +69,13 @@
 - 링크 텍스트가 서로 다른 공지 제목이라 목적을 알 수 있습니다. [6.4.3 적절한 링크 텍스트](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.4.3.json)
 - 링크 이름이 보이는 텍스트와 같습니다. [6.5.3 레이블과 네임](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.5.3.json)
 - `<html lang="ko">`를 확인했습니다. [7.1.1 기본 언어 표시](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-7.1.1.json)
-- 링크 줄 높이와 항목 간 구분선, 안쪽 여백을 유지했습니다. 보고서는 6.1.3의 KWCAG 본문을 ‘바람직하다’ 수준으로 적었습니다. [6.1.3 조작 가능](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.3.json)
+- 이웃한 링크를 하나씩 선택해 쓸 수 있도록 링크 줄 높이와 항목 간 구분선, 안쪽 여백을 유지했습니다. 요구사항은 이웃한 콘트롤을 개별적으로 선택할 수 있는 충분한 크기이고, 크기 수치는 아래 권장 사항에 적었습니다. [6.1.3 조작 가능](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.1.3.json)
 
 보고서는 [6.4.1 반복 영역 건너뛰기](https://kwcag-docs.fe4all.dev/browse#v1/criteria/kwcag-6.4.1.json)도 읽었지만 적용 항목에 넣지 않았습니다. 반복 영역이 기관명 한 줄뿐이라 건너뛰기 링크가 필요한지 판단하기 어려웠다고 적었습니다.
 
 ### NIA 제작기법 권장 사항
 
-- 6.1.3 조작 가능의 크기 수치는 NIA 기본 규칙을 근거로 적었습니다. [NIA 2.1.3 기본 규칙](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-2.1.3-s3.json)
+- 6.1.3의 크기 수치(대각선 6mm 이상, PC 17×17px·모바일 24×24px 이상, 이웃한 콘트롤 사이 1px 이상 간격)는 KWCAG 본문에서도 ‘바람직하다’ 수준이고, NIA 기본 규칙이 정한 권장 사항입니다. [NIA 2.1.3 기본 규칙](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-2.1.3-s3.json)
 - 초점이나 마우스 올림만으로 실행되는 기능이 없음을 확인했습니다(7.2.1). [NIA 3.2.1 기본 규칙](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-3.2.1-s3.json)
 - `id` 중복이 없고 태그 짝이 맞음을 확인했습니다(8.1.1). [NIA 4.1.1 기본 규칙](https://kwcag-docs.fe4all.dev/browse#v1/criteria/nia-4.1.1-s3.json)
 
