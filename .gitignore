@@ -1,3 +1,8 @@
 node_modules/
 dist/
-/.impeccable/critique/
+docs/superpowers/
+.playwright-mcp/
+tests/private-names.local.txt
+.claude/
+.impeccable/
+.superpowers/
